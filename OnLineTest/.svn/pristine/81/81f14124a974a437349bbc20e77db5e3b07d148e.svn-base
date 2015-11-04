@@ -1,0 +1,32 @@
+function checkNull() {
+    var username = (document.getElementById("username")).value;
+    var password = (document.getElementById("password")).value;
+    var identity_tag = document.getElementsByName("identity");
+    var identity = "";
+    var i = 0;
+    while (i < identity_tag.length) {
+    	if (identity_tag[i].checked) {
+            identity = identity_tag[i].value;
+            break;
+        }
+    	i = i + 1;
+    }
+    if (username.trim() == "") {
+        (document.getElementById("login_td_username_check")).innerHTML = "please input username";
+        return false;
+    } else if (password.trim() == "") {
+        (document.getElementById("login_td_username_check")).innerHTML = "";
+        (document.getElementById("login_td_password_check")).innerHTML = "please input password";
+        return false;
+    } else if (identity.trim() == "") {
+        (document.getElementById("login_td_username_check")).innerHTML="";
+        (document.getElementById("login_td_password_check")).innerHTML = "";
+        (document.getElementById("login_td_iden_check")).innerHTML = "please select identity";
+        return false;
+    } else {
+        (document.getElementById("login_td_username_check")).innerHTML="";
+        (document.getElementById("login_td_password_check")).innerHTML = "";
+        (document.getElementById("login_td_iden_check")).innerHTML = "";
+        return true;
+    }
+}

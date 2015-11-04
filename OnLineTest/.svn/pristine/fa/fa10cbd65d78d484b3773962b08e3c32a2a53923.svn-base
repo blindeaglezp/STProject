@@ -1,0 +1,4 @@
+<%@ page pageEncoding="UTF-8" %>
+<p>姓名：${user.name}</p>
+<p>学号：${user.id}</p>
+<p>班级：${user.classId}</p>

@@ -1,0 +1,13 @@
+package com.zp.service;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * 更改密码业务逻辑
+ * @author blindeagle
+ */
+public interface ChangePasswordServiceI {
+
+	public boolean changePassword(HttpServletRequest request, String oldPassword, String newPassword, String reNewPassword);
+	
+}

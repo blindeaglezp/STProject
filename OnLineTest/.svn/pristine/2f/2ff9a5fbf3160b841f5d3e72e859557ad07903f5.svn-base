@@ -1,0 +1,57 @@
+package com.zp.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.zp.dao.impl.ScoreDaoImpl;
+import com.zp.model.ChoiceQuestion;
+import com.zp.model.Score;
+import com.zp.service.ScoreServiceI;
+
+/**
+ * 成绩管理业务层实现类
+ * @author 盲鹰
+ *
+ */
+public class ScoreServiceImpl implements ScoreServiceI {
+	private Map<Integer, Integer> results = null; // 标准答案集合
+	private Score scoreObj = null; // 成绩对象
+	private ChoiceQuestion cq = null; // 选择题对象
+
+	@Override
+	public List<Score> queryAllScore(String stuId) {
+		return new ScoreDaoImpl().queryScoreByStudentId(stuId);
+	}
+
+	@Override
+	public float calculateScore(String[] choiceQuestionIds, Map<Integer, Integer> answers) {
+		
+		// 查询标准答案，并存入Map集合中
+		results = new HashMap<Integer, Integer>();
+		for (int i = 0; i < choiceQuestionIds.length; i++) {
+			cq = new ChoiceQuestionServiceImpl().queryChoiceQuestionByQuestionId(Integer.parseInt(choiceQuestionIds[i]));
+			Integer result = Integer.parseInt(cq.getResult());
+			results.put(Integer.parseInt(choiceQuestionIds[i]), result);
+		}
+		
+		// 将答案与标准答案最对比，得出分数
+		float score = 0;
+		for (Map.Entry<Integer, Integer> answer : answers.entrySet()) {
+			if (answer.getValue() == results.get(answer.getKey())) {
+				score += 10;
+			}
+		}
+		return score;
+	}
+
+	@Override
+	public int insertScore(String stuId, String testPaperId, float score) {
+		scoreObj = new Score();
+		scoreObj.setStudentId(stuId);
+		scoreObj.setTestpaperId(testPaperId);
+		scoreObj.setValue(score);
+		return new ScoreDaoImpl().insertScore(scoreObj);
+	}
+
+}

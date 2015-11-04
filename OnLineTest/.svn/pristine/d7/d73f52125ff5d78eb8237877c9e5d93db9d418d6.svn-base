@@ -1,0 +1,105 @@
+<%@page pageEncoding="UTF-8" %>
+<%
+	String path = request.getContextPath();
+%>
+<!DOCTYPE html PUBLIC>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>在线考试系统-登录</title>
+		<meta name="Keywords" content="关键词,关键词">
+		<meta name="description" content="">
+		<link type="text/css" rel="stylesheet" href="<%=path %>/css/login.css"></link>
+	</head>
+<body>
+	
+	<!--以class="自定义名称"称之为 类样式-->
+	<div class="login">
+		<form action="<%=request.getContextPath() %>/servlet/LoginServlet?identity=student" method="post">
+			<div class="top">
+				<span>在线考试系统 登录</span>
+				<a class="menu" id="myMenu" href="javascript:void(0);"></a>
+				<div class="box_color">
+					<a href="javascript:;" to="blue_btn.png"><img src="<%=path%>/images/login_images/blue.png"/></a>
+					<a href="javascript:;" to="orange_btn.png"><img src="<%=path%>/images/login_images/orange.png"/></a>
+					<a href="javascript:;" to="green_btn.png"><img src="<%=path%>/images/login_images/green.png"/></a>
+					<a href="javascript:;" to="red_btn.png"><img src="<%=path%>/images/login_images/red.png"/></a>
+				</div>
+			</div>
+			<div class="logo">
+				<a href="#"></a>
+			</div>
+			<div class="text">
+				<input type="text" name="username" id="username" tip="提示：请输入用户名,由数字字母下划线构成(4-16)" placeholder="请输入用户名"/>
+				<input type="password" name="password" id="password" tip="请输入密码,由数字字母下划线构成(6-15)" placeholder="请输入密码"/>
+			</div>
+			<div class="btn">
+				<input class="tz_submit" type="submit" value=""/>
+			</div>
+		</form>
+	</div>
+
+<!--引入jQuery的官方类库-->
+<script type="text/javascript" src="<%=path%>/js/jQuery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// 点击事件
+		$("#myMenu").click(function(){
+			$(".box_color").show();
+		});
+		// 当鼠标指针离开元素时，会发生事件
+		$(".box_color").mouseleave(function(){
+			$(this).hide();
+		});
+		// 点击图标时，换皮肤
+		$(".box_color").find("a").click(function(){
+			var to = $(this).attr("to");
+			//alert("图片的名称："+to);
+			$(".tz_submit").css("background","url('<%=path%>/images/login_images/"+to+"')");
+		});
+		// 失去焦点时
+		$(".text input").blur(function(){
+			$(this).prev(".tips").remove();
+		});
+
+	});
+
+	// 提示层
+	function tz_yanzheng($this){
+		var tip = $this.attr("tip");
+		//alert(tip);
+		$this.prev(".tips").remove();
+		// 在每个匹配的元素之前插入内容。
+		$this.before("<div class='tips'><i></i>"+tip+"</div>");
+	}
+
+
+	// 登录用户名密码验证
+	/*
+	function tz_login(){
+		var username = $("#username").val();
+		var password = $("#password").val();
+		//alert("用户名："+username+"密码："+password);
+		if(username.length == 0 || !/^[\da-zA-Z_\u4e00-\u9fa5]{2,16}$/.test(username) ){
+			//alert("请您输入正确的用户名 ！");
+			tz_yanzheng($("#username"));
+			return false;
+		}
+
+		if(password.length == 0 || !/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,15}$/.test(password)){
+			//alert("您的密码输入错误 ！");
+			tz_yanzheng($("#password"));
+			return false;
+		}
+		alert("恭喜您，成功登录潭州学院教学系统，从此开始您的学习之旅 ！");
+		return true;
+	}
+	*/
+
+
+
+
+</script>
+
+</body>
+</html>

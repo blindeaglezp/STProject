@@ -1,0 +1,32 @@
+<%@ page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>在线考试</title>
+    <link href="<%=request.getContextPath() %>/css/student/student2.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+
+	<!-- start exam1 -->
+    <div class="container">
+        <div class="empty1"></div>
+        <div class="exam1_exam_rule">
+            <div class="exam1_exam_rule_content">
+                <p class="p1">考试方法及规则：</p>
+                <p class="p2">
+                    1.不能用手机
+                </p>
+                <p class="p2">
+                    2.不能交头接耳
+                </p>
+            </div>
+            <div class="empty2"></div>
+            <div class="exam1_exam_rule_button">
+                <a href="<%=request.getContextPath() %>/servlet/StudentServlet?type=stu_exam2&grade_id=${user.gradeId }">我知道了</a>
+            </div>
+        </div>
+    </div>
+    <!-- exam1 end -->
+    
+</body>
+</html>

@@ -1,0 +1,49 @@
+<%@ page pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>登录</title>
+    <link href="<%=request.getContextPath() %>/css/login.css" rel="stylesheet" type="text/css"/>
+    <script src="<%=request.getContextPath() %>/js/login.js"></script>
+</head>
+<body>
+	
+	<!-- start login -->
+    <div class="container">
+        <div class="empty1"></div>
+        <div class="empty2"></div>
+        <div class="login_content">
+            <form action="<%=request.getContextPath() %>/servlet/LoginServlet" method="post">
+                <table class="login_table">
+                    <tr>
+                        <td class="login_td_text">用户名：</td>
+                        <td class="login_td_input"><input type="text" name="username" id="username"/></td>
+                        <td class="login_td_wran" id="login_td_username_check"></td>
+                    </tr>
+                    <tr>
+                        <td class="login_td_text">密码：</td>
+                        <td class="login_td_input"><input type="password" name="password" id="password"/></td>
+                        <td class="login_td_wran" id="login_td_password_check"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="login_td_iden">
+                            <input type="radio" name="identity" value="student"/>学生
+                            <input type="radio" name="identity" value="teacher"/>教师
+                            <input type="radio" name="identity" value="admin"/>管理员
+                        </td>
+                        <td class="login_td_wran" id="login_td_iden_check"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="login_td_button">
+                            <button type="submit" onclick="checkNull()">登录</button>
+                            <button type="reset">重置</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <!-- login end -->
+    
+</body>
+</html>

@@ -1,0 +1,22 @@
+package com.zp.service;
+
+import java.util.List;
+
+import com.zp.model.Score;
+
+/**
+ * 对成绩操作的业务层接口
+ * @author 盲鹰
+ * @version 1.0
+ */
+public interface ScoreServiceI {
+	
+	/**
+	 * 获得所有学生的成绩
+	 * @author blindeagle
+	 * @param stuId 学号
+	 * @return 所有学生成绩的集合
+	 */
+	public List<Score> queryAllScore(String stuId);
+	
+}

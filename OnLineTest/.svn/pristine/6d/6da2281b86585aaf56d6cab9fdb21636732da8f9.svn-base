@@ -1,0 +1,55 @@
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta content="text/html;charset=UTF-8"/>
+		<title></title>
+		<link href="<%=request.getContextPath() %>/css/student/student1.css" type="text/css" rel="stylesheet"/>
+	</head>
+  
+	<body>
+	
+		<!-- start grade -->
+    	<div class="container">
+	        <div class="stu_top">
+	
+			</div>
+	        <div class="stu_info">
+	        
+	        </div>
+	        <div class="stu_main">
+	            <div class="stu_main_left">
+					<jsp:include page="/public/stu_left.jsp"></jsp:include>
+				</div>  
+	            <div class="grade_main_right">
+	            	<div class="grade_main_right_selectmenu">
+	            		<div class="empty"></div>
+	            		<div class="content">
+		            		<select>
+		            			<option selected="selected" disabled="disabled">--请选择科目--</option>
+		            			<option>大一</option>
+		            			<option>大二</option>
+		            			<option>大三</option>
+		            			<option>大四</option>
+		            		</select>
+		            		<select>
+		            			<option selected="selected" disabled="disabled">--请选择试卷名称--</option>
+		            			<option>大一</option>
+		            			<option>大二</option>
+		            			<option>大三</option>
+		            			<option>大四</option>
+		            		</select>
+		            		<a href="#">查询</a>
+		            	</div>
+	            	</div>
+	            	<div class="grade_main_right_content">
+	            		
+	            	</div>
+	            </div>
+	        </div>
+   		</div>
+    	<!-- grade end -->
+    	
+	</body>
+</html>

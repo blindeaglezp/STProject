@@ -1,0 +1,77 @@
+package com.zp.dao.impl;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.zp.dao.ScoreDaoI;
+import com.zp.model.Score;
+import com.zp.util.JdbcUtil;
+
+public class ScoreDaoImpl extends JdbcUtil implements ScoreDaoI{
+
+	@Override
+	public int insertScore(Score score) {
+		String sql = "insert into score(sco_studentid,sco_testpaperid,sco_value)values(?,?,?)";
+		Object[] params = new Object[]{score.getStudentId(),score.getTestpaperId(),score.getValue()};
+		return getUpdate(sql, params);
+	}
+
+	@Override
+	public int deleteScore(int id) {
+		String sql = "delete from score where id=?";
+		Integer[] params = new Integer[]{id};
+		return getUpdate(sql, params);
+	}
+
+	@Override
+	public int updateScore(Score score) {
+		String sql = "update score set sco_value=? where sco_id=?";
+		Object[] params = new Object[]{score.getValue(),score.getId()};
+		return getUpdate(sql, params);
+	}
+
+	@Override
+	public Score queryScoreByStudentIdAndTestpaperId(String studentId,
+			String testpaperId) {
+		String sql = "select sco_id,sco_value from score where sco_studentid=?,sco_testpaperid=?";
+		String[] params = new String[]{studentId,testpaperId};
+		rs = getQuery(sql, params);
+		Score score = null;
+		try {
+			while(rs.next()){
+				score = new Score();
+				score.setTestpaperId(testpaperId);
+				score.setStudentId(studentId);
+				score.setId(rs.getInt("sco_id"));
+				score.setValue(rs.getInt("sco_value"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return score;
+	}
+
+	@Override
+	public List<Score> queryScoreByStudentId(String studentId) {
+		String sql = "select sco_id,sco_value,sco_testpaperid from score where sco_studentid=?";
+		String[] params = new String[]{studentId};
+		rs = getQuery(sql, params);
+		List<Score> scores = new ArrayList<Score>();
+		Score score = null;
+		try {
+			while(rs.next()){
+				score = new Score();
+				score.setTestpaperId(rs.getString("sco_testpaperId"));
+				score.setStudentId(studentId);
+				score.setId(rs.getInt("sco_id"));
+				score.setValue(rs.getInt("sco_value"));
+				scores.add(score);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return scores;
+	}
+
+}

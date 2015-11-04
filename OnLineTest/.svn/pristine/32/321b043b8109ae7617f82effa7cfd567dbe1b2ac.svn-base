@@ -1,0 +1,84 @@
+/*学生页面头部、左边，学生首页，个人信息，更改密码1，联系我们页面样式*/
+
+*{margin:0px;padding:0px;}
+body{background:#FFF;font-family:"微软雅黑";font-size:14px;color:#666;}
+.container{width:1200px;height:768px;margin:0 auto;background:#1E1E1E;}
+
+/*stu start*/
+.stu_top{width:100%;height:25%;background:#111;}
+.stu_top img{margin:60px 0 0 400px;}
+.stu_info{width:100%;height:10%;background:#3A6F9F;}
+.stu_info p{float:left;margin:25px 0 0 70px;font-size:16px;color:#FFF;}
+.stu_main{width:100%;height:65%;}
+.stu_main_left{width:20%;height:100%;float:left;background:#3C3C3C;}
+.stu_main_left ul li{font-size:16px;list-style:none;padding:10px 40px;text-align:center;}
+.stu_main_left ul li:hover{background:#303030;font-size:18px;color:#FFF;}
+.stu_main_left ul li a{text-decoration:none;color:#D9D9D9;}
+.stu_main_left ul li a:hover{color:#FFF;}
+/*end stu*/
+
+/*start index*/
+.index_main_right{width:80%;height:100%;float:left;background:#F0F2F5;}
+.index_main_right_content{width:70%;height:80%;margin:5% auto;border-style:groove;}
+.index_main_right_content p{padding: 20px;}
+/*index end*/
+
+/*start info*/
+.info_main_right{width:80%;height:100%;float:left;background:#F0F2F5;}
+.info_main_right_content{width:50%;height:80%;border:5px solid #E5E5E5;border-radius:10px;background:#FFF;margin:50px auto;}
+.info_main_right_content table{margin:40px 60px;}
+.info_main_right_content table tr{line-height:200%;}
+.info_td_title{width:50px;text-align:right;}
+.info_td_content{width:200px;}
+/*info end*/
+
+/*start change_password_1*/
+.change_password_1_main_right{width:80%;float:left;height:500px;background:#F0F2F5;}
+.change_password_1_main_right_title{width:100%;height:10%;font-size:16px;background:aliceblue;}
+.change_password_1_main_right_title ul{margin-left:50px;list-style:none;}
+.change_password_1_main_right_title ul li{text-align:center;float:left;width:114px;padding:2px;margin:15px 15px;border-radius:5px;border:1px solid darkgray;}
+.change_password_1_main_right_title ul li:hover{background:#262626;font-size:18px;}
+.change_password_1_main_right_title ul li a{color:chocolate;text-decoration:none;}
+.change_password_1_main_right_content form table{border-radius:10px;width:400px;height:200px;background:#FFF;margin:70px auto;border:10px solid #E5E5E5;padding:50px 0;}
+.change_password_1_td_title{width:120px;text-align:right;font-size:16px;color:#C2A599;}
+.change_password_1_td_content input{width:200px;height:25px;border:1px solid #999;margin-top:10px;}
+.change_password_1_td_button{text-align:center;margin:0px 20px;}
+.change_password_1_td_button button{padding:5px 10px;margin:25px 20px 0;border-radius:1px;background:#428BCA;color:#F9FBFB;}
+/*change_password_1 end*/
+
+/*start connect*/
+.connect_main_right{width:80%;height:100%;float:left;background:#F0F2F5;}
+.connetc_main_right_content{margin:50px auto;width:600px;height:400px;border-radius:5px;background:#FFF;border:10px solid #E5E5E5;color:#111;}
+.connetc_main_right_content table{float:left;margin:40px 40px;}
+.connetc_main_right_content table tr{line-height:200%;}
+.connect_td_title{text-align:right;padding:0px 10px;}
+/*connect end*/
+
+/*start friend*/
+.friend_main_right{width:80%;height:100%;float:left;background:#F0F2F5;}
+.friend_main_right_content{margin:50px auto;width:600px;height:400px;border-radius:15px;background:aquamarine;}
+.friend_main_right_content ul{padding:30px 70px;}
+.friend_main_right_content ul li{list-style:none;line-height:30px;}
+.friend_main_right_content ul li a{text-decoration:none;font-size:16px;}
+/*friend end*/
+
+/*start grade*/
+.grade_main_right{width:80%;height:100%;float:left;background:#F0F2F5;}
+.grade_main_right_selectmenu{width:100%;height:72px;margin:0 auto;}
+.grade_main_right_selectmenu .empty{width:100%;height:30px;}
+.grade_main_right_selectmenu .content{width:500px;height:30px;margin:0 auto;}
+.grade_main_right_selectmenu .content select{margin:0 30px;float:left;}
+.grade_main_right_selectmenu a{text-align:center;text-decoration:none;display:block;width:60px;border:1px solid #333;
+		height:30px;float:right;line-height:30px;color:#333;font-size:16px;background:#FFF;border-radius:3px;
+		margin-top:-5px;}
+.grade_main_right_selectmenu a:hover{background:#555;color:#FFF;}
+/*grade end*/
+
+
+
+
+
+
+
+
+

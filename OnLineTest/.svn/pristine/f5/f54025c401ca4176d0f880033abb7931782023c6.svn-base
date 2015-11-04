@@ -1,0 +1,19 @@
+package com.zp.service.impl;
+
+import com.zp.dao.impl.FillBlanksQuestionDaoImpl;
+import com.zp.model.FillBlanksQuestion;
+import com.zp.service.FillBlanksQuestionServiceI;
+
+/**
+ * 填空题业务实现类
+ * @author 盲鹰
+ * @version 1.0
+ */
+public class FillBlanksQuestionServiceImpl implements FillBlanksQuestionServiceI {
+
+	@Override
+	public FillBlanksQuestion queryFillBlanksQuestionByQuestionId(int id) {
+		return new FillBlanksQuestionDaoImpl().queryFillBlanksQuestionByQuestionId(id);
+	}
+
+}

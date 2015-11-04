@@ -1,0 +1,43 @@
+package com.zp.dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.zp.dao.CourseDaoI;
+import com.zp.util.JdbcUtil;
+
+public class CourseDaoImpl implements CourseDaoI {
+
+	public List<String> queryCourseNameByGradeId(String gradeId) {
+		Connection con = JdbcUtil.getConnection();
+		PreparedStatement ps = null;
+		String sql = "select cou_name from course where cou_gradeid=?";
+		List<String> names = new ArrayList<String>();
+		String name = null;
+		try {
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+			ps.setString(1, gradeId);
+			ResultSet rs = ps.executeQuery();
+			con.commit();
+			while (rs.next()) {
+				name = rs.getString(1);
+				names.add(name);
+			}
+			return names;
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

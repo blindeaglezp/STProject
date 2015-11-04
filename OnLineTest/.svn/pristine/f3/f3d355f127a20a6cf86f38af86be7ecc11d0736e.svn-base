@@ -1,0 +1,24 @@
+<%@ page pageEncoding="UTF-8" %>
+<div id="exam_content">
+    <div class="testpaper_title"><h2>试卷名称</h2></div>
+    <div class="content">
+        <p index="1"><span>第1题：</span>${choiceQuestion.description }</p>
+        <input type="hidden" class="choiceQuestionId" value="${choiceQuestion.id }"/>
+        <div class="answer_options">
+            <p>A. ${choice.a }</p>
+            <p>B. ${choice.b }</p>
+            <p>C. ${choice.c }</p>
+            <p>D. ${choice.d }</p>
+        </div>
+    </div>
+    <div class="answer">
+        <p>选择答案：</p>
+        <div class="content">
+            <div>A<input type="radio" name="answer" value="1"/></div>
+            <div>B<input type="radio" name="answer" value="2"/></div>
+            <div>C<input type="radio" name="answer" value="3"/></div>
+            <div>D<input type="radio" name="answer" value="4"/></div>
+        </div>
+    </div>
+</div>
+

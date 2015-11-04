@@ -1,0 +1,20 @@
+package com.zp.service;
+
+import com.zp.model.JudgeQuestion;
+
+/**
+ * 判断题业务层抽象
+ * @author blindeagle
+ * @version 1.0
+ */
+public interface JudgeQuestionServiceI {
+
+	/**
+	 * 根据id号查询判断题
+	 * @author blindeagle
+	 * @param id id号
+	 * @return JudgeQuestion 查询到的判断题对象
+	 */
+	public JudgeQuestion queryJudgeQuestionByQuestionId(int id);
+	
+}

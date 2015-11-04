@@ -1,0 +1,38 @@
+package com.zp.dao.impl;
+
+import java.sql.SQLException;
+
+import com.zp.dao.ChoiceQuestionDaoI;
+import com.zp.model.ChoiceQuestion;
+import com.zp.util.JdbcUtil;
+
+/**
+ * 选择题数据库操作实现类
+ * @author blindeagle
+ * @version 1.0
+ */
+public class ChoiceQuestionDaoImpl extends JdbcUtil implements ChoiceQuestionDaoI {
+
+	@Override
+	public ChoiceQuestion queryChoiceQuestionByQuestionId(int id) {
+		String sql = "select cq_id,cq_description,cq_choice,cq_result,cq_majorid,cq_courseid from choicequestion where cq_id=?";
+		Integer[] params = new Integer[] {id};
+		ChoiceQuestion choiceQuestion = null;
+		rs = getQuery(sql, params);
+		try {
+			if (rs.next()) {
+				choiceQuestion = new ChoiceQuestion();
+				choiceQuestion.setId(rs.getInt(1));
+				choiceQuestion.setDescription(rs.getString(2));
+				choiceQuestion.setChoice(rs.getString(3));
+				choiceQuestion.setResult(rs.getString(4));
+				choiceQuestion.setMajorId(rs.getString(5));
+				choiceQuestion.setCourseId(rs.getString(6));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return choiceQuestion;
+	}
+
+}

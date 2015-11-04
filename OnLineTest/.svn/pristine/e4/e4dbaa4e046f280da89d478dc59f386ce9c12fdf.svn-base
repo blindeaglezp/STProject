@@ -1,0 +1,71 @@
+package com.zp.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.zp.service.impl.LoginServiceImpl;
+
+/**
+ * 登录页面处理
+ * @author blindeagle
+ * @version 1.0
+ */
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		//获取输入值
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String identity = request.getParameter("identity");
+		
+		//交由service层处理
+		Object user = new LoginServiceImpl().checkLogin(username, password, identity);
+		
+		if (user != null) {
+			if ("error".equals(user.toString())) {
+				if ("student".equals(identity) || "teacher".equals(identity)) {
+					request.getRequestDispatcher("/login.jsp").forward(request, response);
+				} else if ("admin".equals(identity)) {
+					request.getRequestDispatcher("/login_admin.jsp").forward(request, response);
+				} else {
+					try {
+						throw new Exception("请填入用户身份");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			} else {
+				//将用户信息和用户身份添加到session域中
+				HttpSession session = request.getSession();
+				session.setAttribute("user", user);
+				session.setAttribute("identity", identity);
+				if ("student".equals(identity)) {
+					request.getRequestDispatcher("/WEB-INF/jsp/student/index.jsp").forward(request, response);
+				} else if ("teacher".equals(identity)) {
+					
+				} else if ("admin".equals(identity)) {
+					request.getRequestDispatcher("/WEB-INF/jsp/admin/index.jsp").forward(request, response);
+				}
+			}
+		} else {
+			if ("student".equals(identity) || "teacher".equals(identity)) {
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			} else if ("admin".equals(identity)) {
+				request.getRequestDispatcher("/login_admin.jsp").forward(request, response);
+			}
+		}
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

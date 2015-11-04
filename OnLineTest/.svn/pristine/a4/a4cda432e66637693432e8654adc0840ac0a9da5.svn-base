@@ -1,0 +1,154 @@
+//通过选择课程来获取试卷信息
+function changeCourse() {
+	$(".course option").each(function() {
+		if (this.selected) {
+			var data = this.value;
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "/OnLineTest/servlet/StudentServlet?type=query_testpaper_by_courseid",
+				data : {"courseid" : data},
+				success : function(data) {
+					$(data).each(function() {
+						$(".testpaper").append("<option value="+ this.id+ ">"+ this.name+ "</option>");
+					});
+				}
+			});
+		}
+	});
+}
+
+//通过选择试卷来获取被选择试卷的试卷信息
+$(".exam2_confirm_testpaper a").click(function() {
+	$(".exam2_start_test a").show();
+	$(".testpaper option").each(function() {
+		if (this.selected) {
+			var data = this.value;
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "/OnLineTest/servlet/StudentServlet?type=query_testpaper_by_testpaperid",
+				data : {"testpaperid" : data},
+				success : function(data) {
+					$(data).each(function() {
+						var li = $(".exam2_testpaper_info ul li");
+						li.eq(0).append(this.name);
+						li.eq(1).append(this.score);
+						li.eq(2).append(this.testDate);
+					});
+				}
+			});
+		}
+	});
+});
+
+//通过下标获取对应试题内容
+function getQuestionAjax(index, data) {
+	$("#answer_sheet .content ul li").eq(index-1).css({"background":"#111", "color":"#EEE"}).siblings().css({"background":"#EEE", "color":"#111"});
+	$.ajax({
+		type : "POST",
+		dataType : "json",
+		url : "/OnLineTest/servlet/StudentServlet?type=query_question_by_questionindex",
+		data : data,
+		success : function(data) {
+			$("#exam_content .content").children("p").html("<span>第" + index + "题：</span>" + data[0].description).attr("index", index + "");
+			$("#exam_content .content").children(".choiceQuestionId").attr("value", data[0].id)
+			var ps = $("#exam_content .content .answer_options p")
+			ps.eq(0).html("A. " + data[1].a);
+			ps.eq(1).html("B. " + data[1].b);
+			ps.eq(2).html("C. " + data[1].c);
+			ps.eq(3).html("D. " + data[1].d);
+		}
+	});
+}
+
+//点击下一题，获取下一题内容
+function nextQuestion() {
+	var index = parseInt($("#exam_content .content p").attr("index"));
+	var choiceQuestionId = $(".choiceQuestionId").val();
+	var answer = $("input[name='answer']:checked").val();
+	index += 1;
+	var data = {"index":index, "choiceQuestionId":choiceQuestionId, "answer":answer};
+	getQuestionAjax(index, data);
+}
+
+//点击上一题，获取上一题内容
+function preQuestion() {
+	var index = parseInt($("#exam_content .content p").attr("index"));
+	var choiceQuestionId = $(".choiceQuestionId").val();
+	var answer = $("input[name='answer']:checked").val();
+	index -= 1;
+	var data = {"index":index, "choiceQuestionId":choiceQuestionId, "answer":answer};
+	getQuestionAjax(index, data);
+}
+
+//点击第一题，获取第一题内容
+function firstQuestion() {
+	var index = parseInt($("#exam_content .content p").attr("index"));
+	var choiceQuestionId = $(".choiceQuestionId").val();
+	var answer = $("input[name='answer']:checked").val();
+	index = 1;
+	var data = {"index":index, "choiceQuestionId":choiceQuestionId, "answer":answer};
+	getQuestionAjax(index, data);
+}
+
+//点击最后一题，获取最后一题内容
+function lastQuestion() {
+	var index = $(".sessionvalue").val();
+	var choiceQuestionId = $(".choiceQuestionId").val();
+	var answer = $("input[name='answer']:checked").val();
+	var data = {"index":index, "choiceQuestionId":choiceQuestionId, "answer":answer};
+	getQuestionAjax(index, data);
+}
+
+//点击li标签，获取对应试题内容
+$(document).ready(function() {
+    var ul = $("#answer_sheet .content ul");
+    $(document).on("click", "li.question_index", function() {
+        var index = parseInt($(this).val());
+        var choiceQuestionId = $(".choiceQuestionId").val();
+    	var answer = $("input[name='answer']:checked").val();
+        var data = {"index":index, "choiceQuestionId":choiceQuestionId, "answer":answer};
+        getQuestionAjax(index, data);
+    });
+});
+
+function getQuestionCount() {
+	var count = $(".sessionvalue").val();
+	var answer_sheet_content = $("#answer_sheet .content ul");
+	for (var i = 0; i < count; i++) {
+		answer_sheet_content.append("<li class='question_index' value='" + (i + 1) + "'>" + (i + 1) + "</li>");
+	}
+}
+
+$(document).ready(function() {
+	$("#answer_sheet").draggable();
+});
+
+// 提交试卷
+function submitTestPaper() {
+	var choiceQuestionId = $(".choiceQuestionId").val();
+	var answer = $("input[name='answer']:checked").val();
+	var data = {"choiceQuestionId":choiceQuestionId, "answer":answer};
+	$.ajax({
+		type : "POST",
+		dataType : "json",
+		url : "/OnLineTest/servlet/StudentServlet?type=submit_testpaper",
+		data : data,
+		success : function(data) {
+			
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+

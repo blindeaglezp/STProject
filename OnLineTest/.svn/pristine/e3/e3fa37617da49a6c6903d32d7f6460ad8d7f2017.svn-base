@@ -1,0 +1,174 @@
+CREATE TABLE `Admin` (
+`adm_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`adm_name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`adm_sex` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`adm_birth` date NULL DEFAULT NULL,
+`adm_job` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`adm_phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`adm_email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`adm_address` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`adm_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `ChoiceQuestion` (
+`cq_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`cq_description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`cq_choice` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`cq_majorid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`cq_courseid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`cq_testpaperid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`cq_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `Class` (
+`cla_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`cla_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`cla_gradeid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`cla_createdate` date NULL DEFAULT NULL,
+`cla_majorid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`cla_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `Course` (
+`cou_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`cou_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`cou_majorid` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`cou_createdate` date NULL DEFAULT NULL,
+PRIMARY KEY (`cou_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `FillBlanksQuestion` (
+`fbq_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`fbq_description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`fbq_blanks` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`fbq_testpaperid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`fbq_courseid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`fbq_majorid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`fbq_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `Grade` (
+`gra_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`gra_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`gra_majorid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`gra_createDate` date NULL DEFAULT NULL,
+PRIMARY KEY (`gra_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `JudgeQuestion` (
+`jq_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`jq_description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`jq_trueorfalse` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`jq_testpaperid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`jq_courseid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`jq_major` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`jq_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `Major` (
+`maj_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`maj_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`maj_createdate` date NULL DEFAULT NULL,
+PRIMARY KEY (`maj_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `Message` (
+`mes_id` int(11) NOT NULL AUTO_INCREMENT,
+`mes_title` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`mes_content` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`mes_attachment` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`mes_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci
+AUTO_INCREMENT=1;
+
+CREATE TABLE `Student` (
+`stu_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`stu_name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`stu_sex` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`stu_birth` date NULL DEFAULT NULL,
+`stu_majorid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`stu_classid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`stu_phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`stu_email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`stu_address` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`stu_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `Teacher` (
+`tea_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`tea_name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tea_sex` varchar(2) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tea_birth` date NULL DEFAULT NULL,
+`tea_majorid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tea_courseid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tea_phone` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tea_email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tea_address` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`tea_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `TestPaper` (
+`tp_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`tp_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tp_courseid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tp_majorid` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+`tp_createdate` date NULL DEFAULT NULL,
+PRIMARY KEY (`tp_id`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `User` (
+`username` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`password` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+PRIMARY KEY (`username`) 
+)
+ENGINE=InnoDB
+DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE `Score` (
+`sco_id` int NULL,
+`sco_studentid` varchar(20) NULL,
+`sco_courseid` varchar(20) NULL,
+`sco_value` int NULL,
+PRIMARY KEY (`sco_id`) 
+);
+
+
+ALTER TABLE `Student` ADD CONSTRAINT `stu_id` FOREIGN KEY (`stu_id`) REFERENCES `User` (`username`);
+ALTER TABLE `Teacher` ADD CONSTRAINT `tea_id` FOREIGN KEY (`tea_id`) REFERENCES `User` (`username`);
+ALTER TABLE `Admin` ADD CONSTRAINT `adm_id` FOREIGN KEY (`adm_id`) REFERENCES `User` (`username`);
+ALTER TABLE `Grade` ADD CONSTRAINT `gra_majorid` FOREIGN KEY (`gra_majorid`) REFERENCES `Major` (`maj_id`);
+ALTER TABLE `Class` ADD CONSTRAINT `cla_gradeid` FOREIGN KEY (`cla_gradeid`) REFERENCES `Grade` (`gra_id`);
+ALTER TABLE `Student` ADD CONSTRAINT `stu_classid` FOREIGN KEY (`stu_classid`) REFERENCES `Class` (`cla_gradeid`);
+ALTER TABLE `TestPaper` ADD CONSTRAINT `tp_courseid` FOREIGN KEY (`tp_courseid`) REFERENCES `Course` (`cou_id`);
+ALTER TABLE `ChoiceQuestion` ADD CONSTRAINT `cq_testpaperid` FOREIGN KEY (`cq_testpaperid`) REFERENCES `TestPaper` (`tp_id`);
+ALTER TABLE `Course` ADD CONSTRAINT `cou_majorid` FOREIGN KEY (`cou_majorid`) REFERENCES `Major` (`maj_id`);
+ALTER TABLE `FillBlanksQuestion` ADD CONSTRAINT `fbq_testpaperid` FOREIGN KEY (`fbq_testpaperid`) REFERENCES `TestPaper` (`tp_id`);
+ALTER TABLE `JudgeQuestion` ADD CONSTRAINT `jq_testpaperid` FOREIGN KEY (`jq_testpaperid`) REFERENCES `TestPaper` (`tp_id`);
+ALTER TABLE `Score` ADD CONSTRAINT `sco_studentid` FOREIGN KEY (`sco_studentid`) REFERENCES `Student` (`stu_id`);
+ALTER TABLE `Score` ADD CONSTRAINT `sco_courseid` FOREIGN KEY (`sco_courseid`) REFERENCES `Course` (`cou_id`);
+ALTER TABLE `Teacher` ADD CONSTRAINT `tea_course` FOREIGN KEY (`tea_courseid`) REFERENCES `Course` (`cou_id`);
+

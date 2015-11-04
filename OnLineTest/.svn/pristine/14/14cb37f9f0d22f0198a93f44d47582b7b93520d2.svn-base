@@ -1,0 +1,42 @@
+package com.zp.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.zp.model.Score;
+
+/**
+ * 对成绩操作的业务层接口
+ * @author 盲鹰
+ * @version 1.0
+ */
+public interface ScoreServiceI {
+	
+	/**
+	 * 获得所有学生的成绩
+	 * @author blindeagle
+	 * @param stuId 学号
+	 * @return List<Score> 所有学生成绩的集合
+	 */
+	public List<Score> queryAllScore(String stuId);
+	
+	/**
+	 * 将分数存入数据库
+	 * @author blindeagle
+	 * @param stuId 学号
+	 * @param testPaperId 试卷号
+	 * @param score 分数
+	 * @return int 受影响条数
+	 */
+	public int insertScore(String stuId, String testPaperId, float score);
+	
+	/**
+	 * 获取最终分数
+	 * @author blindeagle
+	 * @param chioceQuestionIds 选择题id号集合
+	 * @param answers 学生提交试题结果集合
+	 * @return float 最终分数
+	 */
+	public float calculateScore(String[] choiceQuestionIds, Map<Integer, Integer> answers);
+	
+}

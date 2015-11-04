@@ -1,0 +1,20 @@
+package com.zp.dao;
+
+import com.zp.model.JudgeQuestion;
+
+/**
+ * 判断题数据库操作类抽象
+ * @author blindeagle
+ * @version 1.0
+ */
+public interface JudgeQuestionDaoI {
+
+	/**
+	 * 根据判断题id号查询试题
+	 * @author blindeagle
+	 * @param id id号
+	 * @return JudgeQuestion 查询到的判断题对象
+	 */
+	public JudgeQuestion queryJudgeQuestionByQuestionId(int id);
+	
+}

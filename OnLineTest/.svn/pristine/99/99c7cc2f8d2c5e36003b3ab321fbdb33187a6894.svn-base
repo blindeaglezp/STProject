@@ -1,0 +1,19 @@
+package com.zp.service.impl;
+
+import com.zp.dao.impl.JudgeQuestionDaoImpl;
+import com.zp.model.JudgeQuestion;
+import com.zp.service.JudgeQuestionServiceI;
+
+/**
+ * 判断题业务层实现类
+ * @author blindeagle
+ * @version 1.0
+ */
+public class JudgeQuestionServiceImpl implements JudgeQuestionServiceI {
+
+	@Override
+	public JudgeQuestion queryJudgeQuestionByQuestionId(int id) {
+		return new JudgeQuestionDaoImpl().queryJudgeQuestionByQuestionId(id);
+	}
+
+}

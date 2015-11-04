@@ -1,0 +1,27 @@
+package com.zp.dao;
+
+/**
+ * 对学生、教师、管理员数据库操作类的抽象
+ * @author blindeagle
+ */
+public interface UserDaoI {
+
+	/**
+	 * 查询数据库，检查用户是否存在
+	 * @author blindeagle
+	 * @param username	用户名
+	 * @param password	密码
+	 * @return	若用户存在，返回该用户，否则返回null
+	 */
+	public Object checkLogin(String username, String password);
+	
+	/**
+	 * 更新用户密码
+	 * @author blindeagle
+	 * @param id						用户id
+	 * @param newPassword		用户新密码
+	 * @return	若修改成功，返回true，否则返回false
+	 */
+	public boolean updatePassword(String id, String newPassword);
+	
+}

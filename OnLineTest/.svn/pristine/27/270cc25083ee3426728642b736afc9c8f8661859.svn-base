@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/admin/index.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/student/exam3.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/student/exam4.jsp=UTF-8
+encoding//WebContent/login.jsp=UTF-8
+encoding//WebContent/public/student/choice_question.jsp=UTF-8
+encoding//WebContent/public/student/judge_question.jsp=UTF-8
+encoding//WebContent/testpaper/choicequestion.jsp=UTF-8

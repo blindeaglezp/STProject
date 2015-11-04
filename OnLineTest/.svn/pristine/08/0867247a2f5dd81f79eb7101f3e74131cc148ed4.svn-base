@@ -1,0 +1,25 @@
+package com.zp.util;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+/**
+ * Date转化操作类
+ * @author 盲鹰
+ * @version 1.0
+ */
+public class DateConvert {
+	private static DateFormat format = null;
+	
+	/**
+	 * 将Date类型数据转化为String类型
+	 * @param date 时间数据
+	 * @return date转化成String类型的数据
+	 */
+	public static String dateToString(Date date) {
+		format = SimpleDateFormat.getInstance();
+		return format.format(date);
+	}
+
+}

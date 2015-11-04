@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <style type="text/css">
+        *{margin:0px;padding:0px;}
+        body{font-size:14px;font-family:"微软雅黑";color:#666;}
+        ul li{list-style:none;}
+    </style>
+</head>
+	<body>
+		<ul class="choice_question">
+		    <li>
+		        <p class="id">1</p>
+		        <input class="questiontype" type="hidden" value="choice"/>
+		        <p class="description">以下是Java两个保留字是（）</p>
+		        <p class="choices">try---class---const---finally</p>
+		        <p class="result">3</p>
+		        <br/>
+		    </li>
+		</ul>
+		<ul class="judge_question">
+		    <li>
+		        <p class="id">1</p>
+		        <input class="questiontype" type="hidden" value="judge"/>
+		        <p class="description">const、goto是Java两个保留字</p>
+		        <p class="result">1</p>
+		        <br/>
+		    </li>
+		</ul>
+		<ul class="fillblanks_question">
+		    <li>
+		        <p class="id">1</p>
+		        <input class="questiontype" type="hidden" value="fillblanks"/>
+		        <p class="description">Java两个保留字是?,?</p>
+		        <p class="content">const---goto</p>
+		        <p class="result">1</p>
+		        <br/>
+		    </li>
+		</ul>
+	</body>
+</html>

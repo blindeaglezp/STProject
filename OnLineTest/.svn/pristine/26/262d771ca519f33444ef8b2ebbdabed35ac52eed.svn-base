@@ -1,0 +1,20 @@
+package com.zp.dao;
+
+import com.zp.model.FillBlanksQuestion;
+
+/**
+ * 填空题数据库操作类抽象
+ * @author blindeagle
+ * @version 1.0
+ */
+public interface FillBlanksQuestionDaoI {
+	
+	/**
+	 * 根据填空题id查询试题
+	 * @author blindeagle
+	 * @param id 填空题id
+	 * @return FillBlanksQuestion 填空题试题对象
+	 */
+	public FillBlanksQuestion queryFillBlanksQuestionByQuestionId(int id);
+	
+}

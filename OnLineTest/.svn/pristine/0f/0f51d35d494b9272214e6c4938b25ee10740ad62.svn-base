@@ -1,0 +1,122 @@
+package com.zp.util;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
+
+/**
+ * 数据库操作工具类
+ * @author blindeagle
+ */
+public class JdbcUtil {
+	
+	private static final String URL;
+	private static final String USERNAME;
+	private static final String PASSWORD;
+	private static final String DRIVER;
+	private static Properties prop;
+	
+	/**
+	 * 加载配置文件中的信息
+	 */
+	static {
+		prop = new Properties();
+		try {
+			prop.load(JdbcUtil.class.getClassLoader().getResourceAsStream("db.properties"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		URL = prop.getProperty("URL");
+		USERNAME = prop.getProperty("USERNAME");
+		PASSWORD = prop.getProperty("PASSWORD");
+		DRIVER = prop.getProperty("DRIVER");
+	}
+
+	/**
+	 * 获取数据库连接
+	 * @author blindeagle
+	 * @return 若获取到，返回数据库的连接，否则返回null
+	 */
+	public static Connection getConnection() {
+		try {
+			Class.forName(DRIVER);
+			return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 关闭数据库连接
+	 * @author blindeagle
+	 * @param con	数据库连接
+	 * @param ps		预编译的 SQL 语句的对象
+	 * @param rs		结果集
+	 */
+	public static void closeConnection(Connection con, PreparedStatement ps, ResultSet rs) {
+		try {
+			if (con != null) {
+				con.close();
+			}
+			if (ps != null) {
+				ps.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	/**
+	 * 关闭数据库连接
+	 * @author blindeagle
+	 * @param con	数据库连接
+	 * @param ps		预编译的 SQL 语句的对象
+	 */
+	public static void closeConnection(Connection con, PreparedStatement ps) {
+		closeConnection(con, ps, null);
+	}
+	
+	/**
+	 * 对数据库增删改操作的抽象
+	 * @author blindeagle
+	 * @param sql			sql语句
+	 * @param params	参数数组
+	 * @return	修改的记录条数
+	 */
+	public static int update(String sql, Object[] params) {
+		Connection con = getConnection();
+		PreparedStatement ps = null;
+		int result = 0;
+		try {
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(sql);
+			for (int i = 0; i < params.length; i++) {
+				ps.setObject(i + 1, params[i]);
+			}
+			result = ps.executeUpdate();
+			con.commit();
+			return result;
+		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		} finally {
+			closeConnection(con, ps);
+		}
+		return 0;
+	}
+	
+}

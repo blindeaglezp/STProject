@@ -1,0 +1,87 @@
+*{margin:0px;padding:0px;}
+body{background:#262626;font-family:"微软雅黑";font-size: 14px;color:#666;}
+.container{width:1200px;height:768px;margin:0 auto;background: cornflowerblue;}
+
+/*start exam1*/
+.empty1{width:20%;height:100%;float:left;}
+.exam1_exam_rule{width:60%;height:80%;float:left;border-radius:10px;background:aliceblue;margin:30px auto;}
+.exam1_exam_rule_content{width:90%;height:80%;border:1px groove darkgray;margin:40px auto 10px auto;}
+.exam1_exam_rule_content .p1{padding:20px 20px 10px 20px;}
+.exam1_exam_rule_content .p2{padding:0px 20px;text-indent:28px;}
+.empty2{width:100%;height:10px;}
+.exam1_exam_rule_button{width:100%;height:10%;text-align:center;}
+.exam1_exam_rule_button a{text-decoration:none;padding:5px 10px;border-radius:5px;color:black;border:2px groove black;}
+.exam1_exam_rule_button a:hover{background-color:darkgray;}
+/*exam1 end*/
+
+/*start exam2*/
+.empty3{width:100%;height:10%;}
+.exam2_content{width:60%;height:80%;background:aqua;border:3px groove darkgray;border-radius:20px;margin:0 auto;}
+.exam2_stu_info{width:80%;height:10%;margin:30px auto;border-radius:50%;background:aliceblue;}
+.exam2_stu_info ul{list-style:none;}
+.exam2_stu_info ul li{float:left;margin:18px 20px;}
+.exam2_testpaper_select{width:80%;height:10%;margin:30px auto;border-radius:50%;background:aliceblue;}
+.exam2_testpaper_select ul{list-style:none;}
+.exam2_testpaper_select ul li{float:left;margin:18px 80px 18px 30px;}
+.exam2_confirm_testpaper{text-align:center;}
+.exam2_confirm_testpaper a{width:100px;height:30px;text-decoration:none;color: darkmagenta;font-size:18px;border:2px groove darkgray;
+    border-radius:5px;background-color:antiquewhite;padding:5px 10px;}
+.exam2_confirm_testpaper a:hover{background:darkgray;}
+.exam2_testpaper_info{width:400px;height:150px;margin:50px auto;background:azure;}
+.exam2_testpaper_info ul{list-style:none;padding:25px 40px;}
+.exam2_testpaper_info ul li{list-style:none;line-height:200%;}
+.exam2_start_test{width:100%;height:50px;}
+.exam2_start_test a{width:100px;height:30px;padding:5px 10px;border-radius:8px;background:antiquewhite;border:2px groove darkgray;
+    text-decoration:none;font-size:24px;margin-left:70%;display:none;}
+.exam2_start_test a:hover{background-color:darkgray;}
+/*exam2 end*/
+
+/*start exam3*/
+/* start stu_info */
+#stu_info{width:996px;height:50px;border:1px solid #666;}
+#stu_info p{float:left;margin:0 40px;line-height:50px;text-align:center;}
+#stu_info p:first-child{margin-left:150px;}
+/* stu_info end */
+/* start exam_content */
+#exam_content{width:100%;}
+#exam_content .testpaper_title{width:100%;height:80px;}
+#exam_content .testpaper_title h2{width:100%;text-align:center;line-height:80px;font-weight:normal;
+      font-size:26px;}
+#exam_content .content{width:96%;border:1px dashed #C9C9C9;margin:0 auto;}
+#exam_content .content p{width:96%;margin:0 auto;border-bottom:1px dashed #C9C9C9;font-size:16px;
+      line-height:50px;}
+#exam_content .content p span{color:red;}
+#exam_content .content .answer_options{width:100%;height:350px;}
+#exam_content .content .answer_options p{border:none;line-height:35px;}
+#exam_content .answer{width:96%;height:40px;border:1px solid #F4F4F4;font-weight:bold;background:#F4F4F4;
+       margin:10px auto 0;}
+#exam_content .answer p{float:left;line-height:40px;font-size:16px;margin-left:30px;}
+#exam_content .answer .content{border:none;margin:12px 0 0 100px;}
+#exam_content .answer .content div{float:left;margin:0 20px;}
+#exam_content .answer .content div input{margin-left:5px;}
+/* exam_content end */
+/* start exam_btn */
+#exam_btn{width:96%;height:70px;border:1px dashed red;margin:20px auto 0;background:#FCEBDC;}
+#exam_btn a{text-decoration:none;border:1px solid #CCC;width:75px;height:30px;display:block;float:left;
+       line-height:30px;margin:20px 20px 0;text-align:center;font-size:16px;border-radius:3px;
+       color:#111;background:#EEE;}
+#exam_btn a:hover{background:#111;color:#EEE;}
+#exam_btn a:first-child{margin-left:260px;}
+/* exam_btn end */
+/* start answer_sheet */
+#answer_sheet{width:160px;height:408px;border:1px solid #333;position:fixed;top:70px;background:#FFF;
+       left:10px;}
+#answer_sheet:hover{cursor:pointer;}
+#answer_sheet .title{width:100%;height:35px;background:#39F;color:#FFF;text-align:center;line-height:35px;
+       font-weight:bold;font-size:16px;}
+#answer_sheet .content{width:100%;height:305px;}
+#answer_sheet .content ul li{width:20px;height:20px;display:block;border:1px solid #CCC;float:left;
+       margin:5px 5px;text-align:center;line-height:20px;background:#EEE;color:#111;}
+#answer_sheet .content ul li:hover{cursor:pointer;background:#111;color:#EEE;}
+#answer_sheet .content ul li:first-child{background:#111;color:#EEE;}
+#answer_sheet .btn{width:100%;height:60px;}
+#answer_sheet .btn a{width:158px;height:30px;line-height:30px;display:block;text-align:center;text-decoration:none;border:1px solid #CCC;
+       	color:#111;margin:2px 0 0;background:#EEE;border-radius:3px;}
+#answer_sheet .btn a:hover{background:#111;color:#EEE;}
+/* answer_sheet end */
+/*exam3 end*/

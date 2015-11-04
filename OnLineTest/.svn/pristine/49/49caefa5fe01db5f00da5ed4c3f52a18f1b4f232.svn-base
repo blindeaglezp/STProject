@@ -1,0 +1,60 @@
+//通过选择课程来获取试卷信息
+function changeCourse() {
+	$(".course option").each(function() {
+		if (this.selected) {
+			var data = this.value;
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "/OnLineTest/servlet/StudentServlet?type=query_testpaper_by_courseid",
+				data : {"courseid" : data},
+				success : function(data) {
+					$(data).each(function() {
+						$(".testpaper").append("<option value="+ this.id+ ">"+ this.name+ "</option>");
+					});
+				}
+			});
+		}
+	});
+}
+
+//通过选择试卷来获取被选择试卷的试卷信息
+$(".exam2_confirm_testpaper a").click(function() {
+	$(".exam2_start_test a").show();
+	$(".testpaper option").each(function() {
+		if (this.selected) {
+			var data = this.value;
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "/OnLineTest/servlet/StudentServlet?type=query_testpaper_by_testpaperid",
+				data : {"testpaperid" : data},
+				success : function(data) {
+					$(data).each(function() {
+						var li = $(".exam2_testpaper_info ul li");
+						li.eq(0).append(this.name);
+						li.eq(1).append(this.score);
+						li.eq(2).append(this.testDate);
+					});
+				}
+			});
+		}
+	});
+});
+
+//点击下一题，获取下一题内容
+function nextQuestion() {
+	var index = parseInt($("#exam_content .content p").attr("index"));
+	index += 1;
+	var data = {"index":index};
+	$.ajax({
+		type : "POST",
+		ataType : "json",
+		url : "/OnLineTest/servlet/StudentServlet?type=query_question_by_questionindex",
+		data : data,
+		success : function(data) {
+			alert(data);
+			$("#exam_content .content p").html("<span>第"+index+"题：</span>"+data.description);
+		}
+	});
+}

@@ -1,0 +1,35 @@
+package com.zp.service.impl;
+
+import com.zp.dao.UserDaoI;
+import com.zp.dao.impl.AdminDaoImpl;
+import com.zp.dao.impl.StudentDaoImpl;
+import com.zp.dao.impl.TeacherDaoImpl;
+import com.zp.service.LoginServiceI;
+
+/**
+ * 登录业务处理实现类
+ * @author blindeagle
+ */
+public class LoginServiceImpl implements LoginServiceI {
+	
+	private UserDaoI loginDaoI;
+
+	public Object checkLogin(String username, String password, String identity) {
+		if (username == null || password == null || identity == null || "".equals(username.trim()) || "".equals(password.trim()) || "".equals(identity.trim())) {
+			return "error";
+		}
+		if ("student".equals(identity)) {
+			loginDaoI = new StudentDaoImpl();
+		} else if ("teacher".equals(identity)) {
+			loginDaoI = new TeacherDaoImpl();
+		} else if ("admin".equals(identity)) {
+			loginDaoI = new AdminDaoImpl();
+		}
+		Object user = loginDaoI.checkLogin(username, password);
+		if (user != null) {
+			return user;
+		}
+		return null;
+	}
+	
+}

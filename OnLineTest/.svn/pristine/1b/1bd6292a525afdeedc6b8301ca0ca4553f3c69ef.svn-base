@@ -1,0 +1,61 @@
+function changeCourse() {
+	$(".course option").each(function() {
+		if (this.selected) {
+			var data = this.value;
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "/OnLineTest/servlet/StudentServlet?type=query_testpaper_by_courseid",
+				data : {"courseid" : data},
+				success : function(data) {
+					$(data).each(function() {
+						$(".testpaper").append("<option value="+ this.id+ ">"+ this.name+ "</option>");
+					});
+				}
+			});
+		}
+	});
+}
+$(".exam2_confirm_testpaper a")
+		.click(
+				function() {
+					$(".exam2_start_test a").show();
+					$(".course option")
+							.each(
+									function() {
+										if (this.selected) {
+											var data = this.value;
+											$
+													.ajax({
+														type : "POST",
+														dataType : "json",
+														url : "/OnLineTest/servlet/StudentServlet?type=query_testpaper_by_testpaperid",
+														data : {
+															"testpaperid" : data
+														},
+														success : function(data) {
+															$(data)
+																	.each(
+																			function() {
+																				var li = $(".exam2_testpaper_info ul li");
+																				li
+																						.eq(
+																								0)
+																						.append(
+																								this.name);
+																				li
+																						.eq(
+																								1)
+																						.append(
+																								this.score);
+																				li
+																						.eq(
+																								2)
+																						.append(
+																								this.testDate);
+																			});
+														}
+													});
+										}
+									});
+				});

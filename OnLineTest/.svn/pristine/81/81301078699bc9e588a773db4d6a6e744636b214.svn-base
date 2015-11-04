@@ -1,0 +1,2 @@
+<%@ page pageEncoding="UTF-8" %>
+<img src="<%=request.getContextPath() %>/images/header.png" width="482" height="82" alt=""/>

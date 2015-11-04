@@ -1,0 +1,40 @@
+package com.zp.dao.impl;
+
+import java.sql.SQLException;
+
+import com.zp.dao.JudgeQuestionDaoI;
+import com.zp.model.JudgeQuestion;
+import com.zp.util.JdbcUtil;
+
+/**
+ * 判断题数据库操作类实现
+ * @author blindeagle
+ * @version 1.0
+ */
+public class JudgeQuestionDaoImpl extends JdbcUtil implements JudgeQuestionDaoI {
+	
+	private JudgeQuestion judgeQuestion = null; // 判断题对象
+
+	@Override
+	public JudgeQuestion queryJudgeQuestionByQuestionId(int id) {
+		String sql = "select jq_description,jq_trueorfalse,jq_courseid,jq_majorid from judgequestion where jq_id=?";
+		Integer[] params = new Integer[id];
+		rs = getQuery(sql, params);
+		try {
+			if (rs.next()) {
+				judgeQuestion = new JudgeQuestion();
+				judgeQuestion.setId(id);
+				judgeQuestion.setDescription(rs.getString(1));
+				judgeQuestion.setTrueOrFalse(rs.getString(2));
+				judgeQuestion.setCourseId(rs.getString(3));
+				judgeQuestion.setMajorId(rs.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection();
+		}
+		return judgeQuestion;
+	}
+
+}

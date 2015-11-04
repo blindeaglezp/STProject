@@ -1,0 +1,38 @@
+package com.zp.dao.impl;
+
+import java.sql.SQLException;
+
+import com.zp.dao.FillBlanksQuestionDaoI;
+import com.zp.model.FillBlanksQuestion;
+import com.zp.util.JdbcUtil;
+
+/**
+ * 填空题数据库操作实现类
+ * @author blindeagle
+ * @version 1.0
+ */
+public class FillBlanksQuestionDaoImpl extends JdbcUtil implements FillBlanksQuestionDaoI {
+	
+	private FillBlanksQuestion fillBlanksQuestion = null;
+
+	@Override
+	public FillBlanksQuestion queryFillBlanksQuestionByQuestionId(int id) {
+		String sql = "select fbq_description,fbq_blanks,fbq_courseid,fbq_majorid from fillblanksquestion where fbq_id=?";
+		Integer[] params = {id};
+		rs = getQuery(sql, params);
+		try {
+			if (rs.next()) {
+				fillBlanksQuestion = new FillBlanksQuestion();
+				fillBlanksQuestion.setId(id);
+				fillBlanksQuestion.setDescription(rs.getString(1));
+				fillBlanksQuestion.setBlanks(rs.getString(2));
+				fillBlanksQuestion.setCourseId(rs.getString(3));
+				fillBlanksQuestion.setMajorId(rs.getString(4));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return fillBlanksQuestion;
+	}
+
+}

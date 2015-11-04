@@ -1,0 +1,24 @@
+package com.zp.test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+
+
+
+
+
+import com.zp.model.FriendLink;
+import com.zp.service.FriendLinkServiceI;
+import com.zp.service.impl.FriendLinkServiceImpl;
+
+public class FriendLinkTest {
+	private FriendLinkServiceI service = new FriendLinkServiceImpl();
+	@Test
+	public void query(){
+		List<FriendLink> list = new ArrayList<FriendLink>();
+		list = service.query();
+		System.out.println(list.get(0).getName());
+	}
+}

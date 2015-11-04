@@ -1,0 +1,26 @@
+package com.zp.service.impl;
+
+import java.util.List;
+
+import com.zp.dao.impl.TestPaperDaoImpl;
+import com.zp.model.TestPaper;
+import com.zp.service.TestPaperServiceI;
+
+/**
+ * 试卷信息操作业务层实现类
+ * @author 盲鹰
+ * @version 1.0
+ */
+public class TestPaperServiceImpl implements TestPaperServiceI {
+
+	@Override
+	public List<TestPaper> queryTestPaperByCourseId(String courseId) {
+		return new TestPaperDaoImpl().queryTestPaperByCourseId(courseId);
+	}
+
+	@Override
+	public TestPaper queryTestPaperByTestPaperId(String testPaperId) {
+		return new TestPaperDaoImpl().queryTestPaperByTestPaperId(testPaperId);
+	}
+
+}

@@ -1,0 +1,72 @@
+<%@page pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>正在考试</title>
+    <meta name="Keywords" content="关键字,关键字">
+    <meta name="description" content="">
+    <link href="<%=request.getContextPath() %>/css/student/student2.css" type="text/css" rel="stylesheet"/>
+    <style type="text/css">
+        *{margin:0px;padding:0px;}
+        body{font-size:14px;font-family:"微软雅黑";color:#666;background:#CFF;}
+        .container{width:998px;height:706px;margin:0 auto;background:#FFF;}
+    </style>
+</head>
+<body onload="javascript:getQuestionCount();">
+	<!-- start exam3 -->
+    <div class="container">
+    	<input class="sessionvalue" type="hidden" value="${choiceCount }"/>
+        <div id="stu_info">
+            <p>考试时间：${testpaper.testTime }分钟</p>
+            <p>准考证号：${user.id }</p>
+            <p>姓名：${user.name }</p>
+            <p>总分：${testpaper.score }分</p>
+        </div>
+        <div id="exam_content">
+            <div class="testpaper_title"><h2>试卷名称</h2></div>
+            <div class="content">
+                <p index="1"><span>第1题：</span>${choiceQuestion.description }</p>
+                <div class="answer_options">
+                    <p>A. ${choice.a }</p>
+                    <p>B. ${choice.b }</p>
+                    <p>C. ${choice.c }</p>
+                    <p>D. ${choice.d }</p>
+                </div>
+            </div>
+            <div class="answer">
+                <p>选择答案：</p>
+                <div class="content">
+                    <div>A<input type="radio" name="answer"/></div>
+                    <div>B<input type="radio" name="answer"/></div>
+                    <div>C<input type="radio" name="answer"/></div>
+                    <div>D<input type="radio" name="answer"/></div>
+                </div>
+            </div>
+        </div>
+        <div id="exam_btn">
+            <a href="javascript:void(0);" class="pre" onclick="javascript:preQuestion();">上一题</a>
+            <a href="javascript:void(0);" class="next" onclick="javascript:nextQuestion();">下一题</a>
+            <a href="javascript:void(0);" class="first" onclick="javascript:firstQuestion();">第一题</a>
+            <a href="javascript:void(0);" class="last" onclick="javascript:lastQuestion();">最后一题</a>
+        </div>
+        <div id="answer_sheet">
+            <div class="title">答题卡</div>
+            <div class="content">
+                <ul>
+                    
+                </ul>
+            </div>
+        	<div class="btn">
+        		<a href="#">检查试卷</a>
+        		<a href="<%=request.getContextPath()%>/servlet/StudentServlet?type=submit_testpaper">提交试卷</a>
+        	</div>
+        </div>
+    </div>
+    <!-- exam3 end -->
+    
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/jQuery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/student/exam.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+package com.zp.model;
+
+/**
+ * 友情链接实体类
+ * @author fer
+ * @version 1.0
+ */
+public class FriendLink {
+	private int id;//id号
+	private String url;//网址
+	private String name;//网站名字
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+}

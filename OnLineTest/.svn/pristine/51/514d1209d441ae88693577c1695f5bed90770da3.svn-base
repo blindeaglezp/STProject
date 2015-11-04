@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<meta name="Keywords" content="">
+		<meta name="description" content="">
+		<style type="text/css">
+			*{margin:0px;padding:0px;}
+			body{font-size:14px;font-family:"微软雅黑";color:#666;}
+			ul li{list-style:none;}
+		</style>
+	</head>
+	<body>
+		<ul>
+	        <li>
+	            <p class="id">1</p>
+	            <p class="description">以下是Java两个保留字是（）</p>
+	            <p class="choices">try---class---const---finally</p>
+	            <p class="result">3</p>
+	        </li>
+   		</ul>
+	</body>
+</html>

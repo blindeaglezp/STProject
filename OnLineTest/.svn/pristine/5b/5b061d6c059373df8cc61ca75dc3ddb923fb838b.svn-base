@@ -1,0 +1,159 @@
+package com.zp.servlet;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.zp.model.Choice;
+import com.zp.model.ChoiceQuestion;
+import com.zp.model.Connect;
+import com.zp.model.Course;
+import com.zp.model.FriendLink;
+import com.zp.model.Score;
+import com.zp.model.Student;
+import com.zp.model.TestPaper;
+import com.zp.service.impl.ChoiceQuestionServiceImpl;
+import com.zp.service.impl.ConnectServiceImpl;
+import com.zp.service.impl.CourseServiceImpl;
+import com.zp.service.impl.FriendLinkServiceImpl;
+import com.zp.service.impl.ScoreServiceImpl;
+import com.zp.service.impl.TestPaperServiceImpl;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+/**
+ * 学生界面处理
+ * 
+ * @author blindeagle
+ * @version 1.0
+ */
+public class StudentServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private JSONArray resultJSONArr = null;
+	private JSONObject resultJSONObj = null;
+	private Choice choiceObj = null;
+	Map<Integer, Integer> answers = new HashMap<Integer, Integer>(); // 存放提交的试题结果
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		response.setCharacterEncoding("UTF-8");
+
+		String type = request.getParameter("type");
+		
+		if ("stu_info".equals(type)) { // 个人信息
+			request.getRequestDispatcher("/WEB-INF/jsp/student/information.jsp").forward(request, response);
+		} else if ("stu_exam1".equals(type)) {
+			request.getRequestDispatcher("/WEB-INF/jsp/student/exam1.jsp").forward(request, response);
+		} else if ("stu_exam2".equals(type)) {
+			String gradeId = request.getParameter("grade_id");
+			List<Course> courses = new CourseServiceImpl().queryCourseByGradeId(gradeId);
+			request.setAttribute("courses", courses);
+			request.getRequestDispatcher("/WEB-INF/jsp/student/exam2.jsp").forward(request, response);
+		} else if ("stu_exam3".equals(type)) { // 到exam3界面
+			// 查询该试卷中第一道题
+			TestPaper testPaper = (TestPaper) request.getSession().getAttribute("testpaper");
+			String[] choiceQuestionId = testPaper.getChoicequestionId().split(",");
+			request.getSession().setAttribute("choiceQuestionId", choiceQuestionId);
+			request.getSession().setAttribute("choiceCount", choiceQuestionId.length);
+			int questionId = Integer.parseInt(choiceQuestionId[0]);
+			ChoiceQuestion choiceQuestion = new ChoiceQuestionServiceImpl().queryChoiceQuestionByQuestionId(questionId);
+			choiceObj = packageChoice(choiceQuestion);
+			request.setAttribute("choiceQuestion", choiceQuestion);
+			request.setAttribute("choice", choiceObj);
+			request.getRequestDispatcher("/WEB-INF/jsp/student/exam3.jsp").forward(request, response);
+		} else if ("stu_grade".equals(type)) { // 成绩查询
+			request.getRequestDispatcher("/WEB-INF/jsp/student/grade.jsp").forward(request, response);
+		} else if ("stu_friend".equals(type)) { // 友情链接
+			List<FriendLink> friendLinks = new FriendLinkServiceImpl().queryAllFriendLink();
+			request.setAttribute("friendLinks", friendLinks);
+			request.getRequestDispatcher("/WEB-INF/jsp/student/friend.jsp").forward(request, response);
+		} else if ("stu_connect".equals(type)) { // 联系我们
+			List<Connect> connects = new ConnectServiceImpl().queryConnect();
+			request.setAttribute("connects", connects);
+			request.getRequestDispatcher("/WEB-INF/jsp/student/connect.jsp").forward(request, response);
+		} else if ("query_testpaper_by_courseid".equals(type)) { // 根据课程号查询试卷信息
+			String courseId = request.getParameter("courseid");
+			List<TestPaper> testPapers = new TestPaperServiceImpl().queryTestPaperByCourseId(courseId);
+			resultJSONArr = JSONArray.fromObject(testPapers);
+			response.getWriter().print(resultJSONArr);
+		} else if ("query_testpaper_by_testpaperid".equals(type)) { // 根据试卷号获取试卷信息
+			String testPaperId = request.getParameter("testpaperid");
+			TestPaper testPaper = new TestPaperServiceImpl().queryTestPaperByTestPaperId(testPaperId);
+			request.getSession().setAttribute("testpaper", testPaper);
+			resultJSONObj = JSONObject.fromObject(testPaper);
+			response.getWriter().print(resultJSONObj);
+		} else if ("query_question_by_questionindex".equals(type)) { // 根据试题索引获取试卷信息
+			List<Object> list = new ArrayList<Object>();
+			int index = Integer.parseInt(request.getParameter("index")); //要获取试题的索引值
+			// 将当前题号和答案存入试题结果集合中
+			int choiceQuestionId = Integer.parseInt(request.getParameter("choiceQuestionId"));
+			int answer = Integer.parseInt(request.getParameter("answer"));
+			answers.put(choiceQuestionId, answer);
+			int choiceQuestionIdReturn = Integer.parseInt(((String[]) request.getSession().getAttribute("choiceQuestionId"))[index - 1]);
+			ChoiceQuestion choiceQuestion = new ChoiceQuestionServiceImpl().queryChoiceQuestionByQuestionId(choiceQuestionIdReturn);
+			choiceObj = packageChoice(choiceQuestion);
+			list.add(choiceQuestion);
+			list.add(choiceObj);
+			resultJSONArr = JSONArray.fromObject(list);
+			response.getWriter().print(resultJSONArr);
+		} else if ("toIndex".equals(type)) { // 到index页面
+			request.getRequestDispatcher("/WEB-INF/jsp/student/index.jsp").forward(request, response);
+		} else if ("query_score_by_studentid".equals(type)) { // 根据学号查询成绩
+			Student student = (Student) request.getSession().getAttribute("user");
+			if (student != null) {
+				List<Score> scores = new ScoreServiceImpl().queryAllScore(student.getId());
+				resultJSONArr = JSONArray.fromObject(scores);
+				response.getWriter().print(resultJSONArr);
+			}
+		} else if ("submit_testpaper".equals(type)) { // 提交试题
+			int choiceQuestionId = Integer.parseInt(request.getParameter("choiceQuestionId"));
+			int answer = Integer.parseInt(request.getParameter("answer"));
+			answers.put(choiceQuestionId, answer);
+			
+			// 计算最终分数
+			String[] choiceQuestionIds = (String[]) request.getSession().getAttribute("choiceQuestionId");
+			float score = new ScoreServiceImpl().calculateScore(choiceQuestionIds, answers);
+			
+			// 将答案存入数据库
+			String stuId = ((Student) request.getSession().getAttribute("user")).getId();
+			String testPaperId = ((TestPaper) (request.getSession().getAttribute("testpaper"))).getId();
+			int result = new ScoreServiceImpl().insertScore(stuId, testPaperId, score);
+			if (result != 0) {
+				String param = "{'data':'success'}";
+				response.getWriter().print(JSONObject.fromObject(param));
+			} else {
+				System.out.println("提交失败！！！");
+			}
+			
+		}
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+	/**
+	 * 将试题选项拆分并将试题选项封装到为Choice对象
+	 * @author blindeagle
+	 * @param choiceQuestion 试题对象
+	 * @return 封装完成的Choice对象
+	 */
+	public Choice packageChoice(ChoiceQuestion choiceQuestion) {
+		String[] choice = choiceQuestion.getChoice().split("---");
+		choiceObj = new Choice();
+		choiceObj.setA(choice[0]);
+		choiceObj.setB(choice[1]);
+		choiceObj.setC(choice[2]);
+		choiceObj.setD(choice[3]);
+		return choiceObj;
+	}
+	
+}

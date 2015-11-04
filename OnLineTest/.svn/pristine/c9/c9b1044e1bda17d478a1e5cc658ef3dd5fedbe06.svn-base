@@ -1,0 +1,22 @@
+package com.zp.dao;
+
+import java.util.List;
+
+import com.zp.model.Course;
+
+/**
+ * 课程科目数据库操作类抽象
+ * @author blindeagle
+ * @version 1.0
+ */
+public interface CourseDaoI {
+	
+	/**
+	 * 根据年级号查询课程
+	 * @author blindeagle
+	 * @param gradeId	年级号
+	 * @return	符合该年级的所有课程的名称和id的集合
+	 */
+	public List<Course> queryCourseNameByGradeId(String gradeId);
+
+}

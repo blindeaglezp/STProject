@@ -1,0 +1,50 @@
+*{margin:0;padding:0;}
+body{background:url("../images/login_images/bg.jpg") no-repeat center fixed;
+		background-size:100% 100%;font-size:12px;font-family:"微软雅黑";color:#666;}
+img{border:0;}
+/* start login */
+.login{width:400px;height:600px;background:#4d4d4d;margin:50px auto;position:relative;}
+.login .top{width:400px;height:60px;background:#1b1b1b;font-size:20px;font-weight:bold;
+		text-align:center;line-height:60px;}
+.login .top span{float:left;margin-left:110px;}
+.login .top span.admin{float:left;margin-left:80px;}
+.login .top .menu{width:60px;height:60px;display:block;float:right;border-left:1px solid #232323;
+		background:url("../images/login_images/icon-config.png") no-repeat center;}
+.login .top .box_color{width:111px;height:164px;position:absolute;right:-114px;display:none;
+		background:url("../images/login_images/white-color-bg.png") no-repeat;}
+.login .top .box_color a{float:left;margin:15px -5px 5px 18px;}
+.login .logo{width:180px;height:180px;background:#1b1b1b;margin:45px auto;
+		border-radius:90px;}
+.login .logo{width:180px;height:180px;background:#1b1b1b;margin:50px auto;
+		border-radius:90px;}
+.login .logo a{width:180px;height:180px;display:block;
+		background:url("../images/login_images/logo.jpg") no-repeat center;}
+.login .text{width:400px;height:215px;margin-top:-30px;}
+.login .text input{width:360px;height:45px;border:0;background:#1b1b1b;
+		color:#4d4d4d;font-size:16px;font-family:"微软雅黑";
+		padding-left:20px;line-height:45px;margin:20px 0 0 20px; border-radius:4px;}
+.login .text div{width:360px;height:45px;background:#CCC;margin:20px auto;border-radius:4px;
+		background:#1b1b1b;}
+.login .text_admin div{width:360px;height:45px;background:#CCC;margin:20px auto;border-radius:4px;
+		background:#1b1b1b;}
+.login .text input.identity_stu{width:15px;height:15px;text-align:left;margin:15px 10px 0 90px;}
+.login .text input.identity_tea{width:15px;height:15px;text-align:left;margin:15px 10px 0 50px;}
+.login .text span{color:#FFF;font-size:16px;}
+.login .text_admin input{width:360px;height:45px;border:0;background:#1b1b1b;
+		color:#4d4d4d;font-size:16px;font-family:"微软雅黑";
+		padding-left:20px;line-height:45px;margin:20px 0 0 20px; border-radius:4px;}
+.login .btn input{width:360px;height:60px;border:0;margin-left:20px;cursor: pointer;
+ 		background:url("../images/login_images/orange_btn.png") no-repeat;}
+.login .btn input{width:360px;height:60px;border:0;margin-left:20px;cursor: pointer;
+ 		background:url("../images/login_images/orange_btn.png") no-repeat;}
+.login .btn input.admin{width:360px;height:60px;border:0;margin:20px 20px;cursor: pointer;
+ 		background:url("../images/login_images/orange_btn.png") no-repeat;}
+.login .text .tips{width:350px;height:30px;border:2px solid #ccc;position:absolute;
+		bottom:245px;left:20px;border-radius:4px;font-size:14px;color:#fff;padding:5px 0 0 5px;}
+.login .text .tips i{background:url("../images/login_images/bullet_arrow_down.png") no-repeat;
+		padding:11px;position:relative;top:29px;}	
+.login .text_admin .tips{width:350px;height:30px;border:2px solid #ccc;position:absolute;
+		bottom:245px;left:20px;border-radius:4px;font-size:14px;color:#fff;padding:5px 0 0 5px;}
+.login .text_admin .tips i{background:url("../images/login_images/bullet_arrow_down.png") no-repeat;
+		padding:11px;position:relative;top:29px;}		
+/* login end */

@@ -1,0 +1,21 @@
+package com.zp.service.impl;
+
+import java.util.List;
+
+import com.zp.dao.impl.ScoreDaoImpl;
+import com.zp.model.Score;
+import com.zp.service.ScoreServiceI;
+
+/**
+ * 成绩管理业务层实现类
+ * @author 盲鹰
+ *
+ */
+public class ScoreServiceImpl implements ScoreServiceI {
+
+	@Override
+	public List<Score> queryAllScore(String stuId) {
+		return new ScoreDaoImpl().queryScoreByStudentId(stuId);
+	}
+
+}

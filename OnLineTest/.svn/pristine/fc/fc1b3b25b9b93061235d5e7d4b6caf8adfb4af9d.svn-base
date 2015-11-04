@@ -1,0 +1,18 @@
+*{margin:0px;padding:0px;}
+body{background:#262626;font-family:微软雅黑;font-size:14px;color:#666;}
+.container{width:1200px;height:700px;margin:0 auto;background:cornflowerblue;}
+
+/*start login*/
+.empty1{width:1200px;height:200px;}
+.empty2{width:400px;height:200px;float:left;}
+.login_content{float:left;width:500px;height:200px;margin:0px auto;color:white;}
+.login_table{width:500px;height:200px;}
+.login_td_text{width:80px;text-align:right;}
+.login_td_input{width:180px;}
+.login_td_input input{border-radius:10px;padding:5px;width:150px;}
+.login_td_wran{width:200px;color:red;}
+.login_td_iden{text-align:center;}
+.login_td_iden input{margin:0 5px;}
+.login_td_button{text-align:center;}
+.login_td_button button{margin:0 15px;padding:5px 10px;border-radius:10px;background: dodgerblue;color: white;}
+/*login end*/

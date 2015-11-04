@@ -1,0 +1,53 @@
+$(function(){
+		// 点击事件
+		$("#myMenu").click(function(){
+			$(".box_color").show();
+		});
+		// 当鼠标指针离开元素时，会发生事件
+		$(".box_color").mouseleave(function(){
+			$(this).hide();
+		});
+		// 点击图标时，换皮肤
+		$(".box_color").find("a").click(function(){
+			var to = $(this).attr("to");
+			//alert("图片的名称："+to);
+			$(".btn input").css("background","url('<%=path%>/images/login_images/"+to+"')");
+		});
+		// 失去焦点时
+		$(".text input").blur(function(){
+			$(this).prev(".tips").remove();
+		});
+
+	});
+
+	// 提示层
+	function tz_yanzheng($this){
+		var tip = $this.attr("tip");
+		//alert(tip);
+		$this.prev(".tips").remove();
+		// 在每个匹配的元素之前插入内容。
+		$this.before("<div class='tips'><i></i>"+tip+"</div>");
+	}
+
+
+	// 登录用户名密码验证
+	/*
+	function tz_login(){
+		var username = $("#username").val();
+		var password = $("#password").val();
+		//alert("用户名："+username+"密码："+password);
+		if(username.length == 0 || !/^[\da-zA-Z_\u4e00-\u9fa5]{2,16}$/.test(username) ){
+			//alert("请您输入正确的用户名 ！");
+			tz_yanzheng($("#username"));
+			return false;
+		}
+
+		if(password.length == 0 || !/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,15}$/.test(password)){
+			//alert("您的密码输入错误 ！");
+			tz_yanzheng($("#password"));
+			return false;
+		}
+		alert("恭喜您，成功登录潭州学院教学系统，从此开始您的学习之旅 ！");
+		return true;
+	}
+	*/

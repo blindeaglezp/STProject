@@ -1,0 +1,56 @@
+package com.zp.servlet;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.zp.model.Connect;
+import com.zp.service.ConnectServiceI;
+import com.zp.service.QueryCourseServiceI;
+import com.zp.service.impl.ConnectServiceImpl;
+import com.zp.service.impl.QueryCourseServiceImpl;
+
+/**
+ * 学生servlet
+ * @author blindeagle
+ */
+public class StudentServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private ConnectServiceI connectServiceI = null;
+	private QueryCourseServiceI queryCourseServiceI = null;
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String type = request.getParameter("type");
+		if ("stu_info".equals(type)) {
+			request.getRequestDispatcher("/WEB-INF/jsp/student/information.jsp").forward(request, response);
+		} else if ("stu_exam1".equals(type)) {
+			request.getRequestDispatcher("/WEB-INF/jsp/student/exam1.jsp").forward(request, response);
+		} else if ("stu_exam2".equals(type)) {
+			String gradeId = request.getParameter("grade_id");
+			queryCourseServiceI = new QueryCourseServiceImpl();
+			List<String> courses = queryCourseServiceI.queryCourseNameByGradeId(gradeId);
+			request.setAttribute("courses", courses);
+			request.getRequestDispatcher("/WEB-INF/jsp/student/exam2.jsp").forward(request, response);
+		} else if ("stu_grade".equals(type)) {
+			request.getRequestDispatcher("/WEB-INF/jsp/student/grade.jsp").forward(request, response);
+		} else if ("stu_friend".equals(type)) {
+			request.getRequestDispatcher("/WEB-INF/jsp/student/friend.jsp").forward(request, response);
+		} else if ("stu_connect".equals(type)) {
+			connectServiceI = new ConnectServiceImpl();
+			List<Connect> connects = connectServiceI.queryConnect();
+			request.setAttribute("connects", connects);
+			request.getRequestDispatcher("/WEB-INF/jsp/student/connect.jsp").forward(request, response);
+		}
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

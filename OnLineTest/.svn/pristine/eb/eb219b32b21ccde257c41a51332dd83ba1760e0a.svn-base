@@ -1,0 +1,20 @@
+package com.zp.service;
+
+import com.zp.model.ChoiceQuestion;
+
+/**
+ * 选择题业务层抽象
+ * @author blindeagle
+ * @version 1.0
+ */
+public interface ChoiceQuestionServiceI {
+	
+	/**
+	 * 根据选择题的id号查询选择题内容
+	 * @author blindeagle
+	 * @param id 选择题id
+	 * @return ChoiceQuestion 选择题对象
+	 */
+	public ChoiceQuestion queryChoiceQuestionByQuestionId(int id);
+	
+}
