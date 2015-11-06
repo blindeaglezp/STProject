@@ -164,32 +164,22 @@ public class StudentServlet extends HttpServlet {
 			request.setAttribute("questionType", "choiceQuestion");
 			request.setAttribute("choice", choiceObj);
 			request.setAttribute("questionCount", questionCount);
-			try {
-				request.getRequestDispatcher("/WEB-INF/jsp/student/exam3.jsp").forward(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (question instanceof JudgeQuestion) {
 			judgeQuestion = (JudgeQuestion) question;
 			request.setAttribute("judgeQuestion", judgeQuestion);
 			request.setAttribute("questionType", "judgeQuestion");
 			request.setAttribute("questionCount", questionCount);
-			try {
-				request.getRequestDispatcher("/WEB-INF/jsp/student/exam3.jsp").forward(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		} else if (question instanceof FillBlanksQuestion) {
 			fillBlanksQuestion = (FillBlanksQuestion) question;
 			request.setAttribute("fillBlanksQuestion", fillBlanksQuestion);
 			request.setAttribute("questionType", "fillBlanksQuestion");
 			request.setAttribute("fillblankscount", fillBlanksQuestion.getBlanks().split("---").length);
 			request.setAttribute("questionCount", questionCount);
-			try {
-				request.getRequestDispatcher("/WEB-INF/jsp/student/exam3.jsp").forward(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		}
+		try {
+			request.getRequestDispatcher("/WEB-INF/jsp/student/exam3.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

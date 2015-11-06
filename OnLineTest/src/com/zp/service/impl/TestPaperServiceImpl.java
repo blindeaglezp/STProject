@@ -2,7 +2,6 @@ package com.zp.service.impl;
 
 import java.util.List;
 
-import com.zp.dao.impl.ChoiceQuestionDaoImpl;
 import com.zp.dao.impl.TestPaperDaoImpl;
 import com.zp.model.ChoiceQuestion;
 import com.zp.model.FillBlanksQuestion;
@@ -13,15 +12,18 @@ import com.zp.util.TestPaperData;
 
 /**
  * 试卷信息操作业务层实现类
- * @author 盲鹰
+ * @author blindeagle
  * @version 1.0
  */
 public class TestPaperServiceImpl implements TestPaperServiceI {
 	
-	private ChoiceQuestion choiceQuestion = null; // 选择题对象
-	private JudgeQuestion judgeQuestion = null; // 判断题对象
-	private FillBlanksQuestion fillBlanksQuestion = null; // 填空题对象
-	private List<Integer> questionIds = null; // 试题id号集合
+	private List<Integer> questionIds = null; // 所有试题id
+	private String choiceQuestionId = null; // 选择题id号信息
+	private String judgeQuestionId = null; // 判断题id信息
+	private String fillBlanksQuestionId = null; // 填空题id信息
+	private int choiceQuestionCount = 0;
+	private int judgeQuestionCount = 0;
+	private int fillBlanksQuestionCount = 0;
 	private int questionCount = 0; // 试题总数
 
 	@Override
@@ -72,11 +74,6 @@ public class TestPaperServiceImpl implements TestPaperServiceI {
 			int questionComplexity = Integer.parseInt(questionInfo[i].split("==")[1]); // 难易程度
 			int questionNum = Integer.parseInt(questionInfo[i].split("==")[2]); // 试题数量
 			
-			System.out.println(sectionId);
-			System.out.println(questionComplexity);
-			System.out.println(questionNum);
-			System.out.println("********************");
-			
 			// 根据章节id号及试题难易程度查询到所有试题的id号
 			if ("choiceQuestion".equals(questionType)) {
 				questionIds = new ChoiceQuestionServiceImpl().queryChoiceQuestionIdBySectionIdAndComplexity(sectionId, questionComplexity);
@@ -104,29 +101,25 @@ public class TestPaperServiceImpl implements TestPaperServiceI {
 						}
 					} while(flag);
 					
-					// 讲试题添加到试题数据集合
+					// 将试题id号连接
 					if ("choiceQuestion".equals(questionType)) {
-						choiceQuestion = new ChoiceQuestionDaoImpl().queryChoiceQuestionByQuestionId(questionId);
-						if (choiceQuestion != null) {
-							TestPaperData.questions.put(questionCount + 1, choiceQuestion); // 将查询到的试题添加到试题集合
-							questionCount++; // 试题总数加1
-						}
+						choiceQuestionId += (questionId + ",");
+						choiceQuestionCount++;
+//						questionCount++;
 					} else if ("judgeQuestion".equals(questionType)) {
-						judgeQuestion = new JudgeQuestionServiceImpl().queryJudgeQuestionByQuestionId(questionId);
-						if (judgeQuestion != null) {
-							TestPaperData.questions.put(questionCount + 1, judgeQuestion);
-							questionCount++;
-						}
+						judgeQuestionId += (questionId + ",");
+						judgeQuestionCount++;
+//						questionCount++;
 					} else if ("fillBlanksQuestion".equals(questionType)) {
-						fillBlanksQuestion = new FillBlanksQuestionServiceImpl().queryFillBlanksQuestionByQuestionId(questionId);
-						if (fillBlanksQuestion != null) {
-							TestPaperData.questions.put(questionCount + 1, fillBlanksQuestion);
-							questionCount++;
-						}
+						fillBlanksQuestionId += (questionId + ",");
+						fillBlanksQuestionCount++;
+//						questionCount++;
 					}
 				}
 			}
 		}
+		// 将临时信息存储
+		TestPaper
 	}
 
 }
