@@ -17,6 +17,7 @@ import com.zp.model.Course;
 import com.zp.model.FillBlanksQuestion;
 import com.zp.model.FriendLink;
 import com.zp.model.JudgeQuestion;
+import com.zp.model.QuestionInformation;
 import com.zp.model.Score;
 import com.zp.model.Student;
 import com.zp.model.TestPaper;
@@ -49,6 +50,7 @@ public class StudentServlet extends HttpServlet {
 	private List<Course> courses = null; // 课程集合
 	private List<Object> questionObj = null; // 存放当前试题信息的集合
 	private List<Score> scores = null; // 成绩集合
+	private TestPaperData data = null; // 试题临时信息对象
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -154,33 +156,19 @@ public class StudentServlet extends HttpServlet {
 			}
 		}
 		
-		// 查询并将查询结果添加到试题集合
-		int questionCount = new TestPaperServiceImpl().findAndPackageMap(testPaper);
-		Object question = TestPaperData.questions.get(1);
-		if (question instanceof ChoiceQuestion) {
-			choiceQuestion = (ChoiceQuestion) question;
-			choiceObj = packageChoice(choiceQuestion);
-			request.setAttribute("choiceQuestion", choiceQuestion);
-			request.setAttribute("questionType", "choiceQuestion");
-			request.setAttribute("choice", choiceObj);
-			request.setAttribute("questionCount", questionCount);
-		} else if (question instanceof JudgeQuestion) {
-			judgeQuestion = (JudgeQuestion) question;
-			request.setAttribute("judgeQuestion", judgeQuestion);
-			request.setAttribute("questionType", "judgeQuestion");
-			request.setAttribute("questionCount", questionCount);
-		} else if (question instanceof FillBlanksQuestion) {
-			fillBlanksQuestion = (FillBlanksQuestion) question;
-			request.setAttribute("fillBlanksQuestion", fillBlanksQuestion);
-			request.setAttribute("questionType", "fillBlanksQuestion");
-			request.setAttribute("fillblankscount", fillBlanksQuestion.getBlanks().split("---").length);
-			request.setAttribute("questionCount", questionCount);
-		}
-		try {
-			request.getRequestDispatcher("/WEB-INF/jsp/student/exam3.jsp").forward(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		// 查询并暂时存储数据
+		new TestPaperServiceImpl().findAndPackageMap(studentId, testPaper);
+		
+		// 查询各类型试题数量
+		data = new TestPaperData();
+		// 将信息存入request域
+		request.setAttribute("choiceQuestionCount", questionInformation.choiceQuestionCount);
+		request.setAttribute("judgeQuestionCount", questionInformation.judgeQuestionCount);
+		request.setAttribute("fillBlanksQuestionCount", questionInformation.fillBlanksQuestionCount);
+		
+		// 跳转到exam3.jsp页面
+		request.getRequestDispatcher("/WEB-INF/jsp/student/exam3.jsp").forward(request, response);
+		
 	}
 	
 	/**

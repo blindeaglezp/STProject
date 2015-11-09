@@ -30,9 +30,10 @@ public interface TestPaperServiceI {
 	/**
 	 * 查询并将查询结果封装到Map集合
 	 * @author blindeagle
+	 * @param studentId 学号
 	 * @param testPaper 试题对象
-	 * @return int 试卷总题数
+	 * @return void
 	 */
-	public int findAndPackageMap(TestPaper testPaper);
+	public void findAndPackageMap(String studentId, TestPaper testPaper);
 	
 }

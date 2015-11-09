@@ -2,6 +2,7 @@ package com.zp.model;
 
 /**
  * 每个人每次考试的试题信息实体
+ * 
  * @author blindeagle
  * @version 1.0
  */
@@ -10,12 +11,21 @@ public class QuestionInformation {
 	private int id; // id号
 	private String studentId; // 学号
 	private String courseId; // 课程号
+	private String testPaperId; // 试卷号
 	private String choiceQuestionId; // 选择题ID号
 	private String judgeQuestionId; // 判断题ID号
 	private String fillBlanksQuestionId; // 填空题ID号
 	private String choiceQuestionAnswer; // 选择题答案
 	private String judgeQuestionAnswer; // 判断题答案
 	private String fillBlanksQuestionAnswer; // 填空题答案
+
+	public String getTestPaperId() {
+		return testPaperId;
+	}
+
+	public void setTestPaperId(String testPaperId) {
+		this.testPaperId = testPaperId;
+	}
 
 	public String getChoiceQuestionAnswer() {
 		return choiceQuestionAnswer;

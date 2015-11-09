@@ -1,14 +1,12 @@
 package com.zp.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zp.dao.impl.TestPaperDaoImpl;
-import com.zp.model.ChoiceQuestion;
-import com.zp.model.FillBlanksQuestion;
-import com.zp.model.JudgeQuestion;
+import com.zp.model.QuestionInformation;
 import com.zp.model.TestPaper;
 import com.zp.service.TestPaperServiceI;
-import com.zp.util.TestPaperData;
 
 /**
  * 试卷信息操作业务层实现类
@@ -17,15 +15,16 @@ import com.zp.util.TestPaperData;
  */
 public class TestPaperServiceImpl implements TestPaperServiceI {
 	
-	private List<Integer> questionIds = null; // 所有试题id
+	private List<Integer> questionIds = null; // 特定条件下的试题id
 	private String choiceQuestionId = null; // 选择题id号信息
 	private String judgeQuestionId = null; // 判断题id信息
 	private String fillBlanksQuestionId = null; // 填空题id信息
-	private int choiceQuestionCount = 0;
-	private int judgeQuestionCount = 0;
-	private int fillBlanksQuestionCount = 0;
-	private int questionCount = 0; // 试题总数
-
+	private int choiceQuestionCount = 0; // 选择题总数
+	private int judgeQuestionCount = 0; // 判断题总数
+	private int fillBlanksQuestionCount = 0; // 填空题总数
+	private Map<String, Integer> questionCount = null; // 各试题的数量
+	private QuestionInformation questionInformation = null; // 试题信息对象
+	
 	@Override
 	public List<TestPaper> queryTestPaperByCourseId(String courseId) {
 		return new TestPaperDaoImpl().queryTestPaperByCourseId(courseId);
@@ -37,7 +36,7 @@ public class TestPaperServiceImpl implements TestPaperServiceI {
 	}
 	
 	@Override
-	public int findAndPackageMap(TestPaper testPaper) {
+	public void findAndPackageMap(String studentId, TestPaper testPaper) {
 		String[] questionInfo = null; // 封装多个{章节号，难以程度，试题数量}信息
 		String questionType = null; // 试题类型
 		
@@ -46,28 +45,26 @@ public class TestPaperServiceImpl implements TestPaperServiceI {
 		if (choiceQuestionInfo != null) {
 			questionInfo = choiceQuestionInfo.split(",");
 			questionType = "choiceQuestion";
-			addQuestionToData(questionType, questionInfo);
+			addQuestionToData(studentId, testPaper, questionType, questionInfo);
 		}
 		
 		String judgeQuestionInfo = testPaper.getJudgeQuestionInfo();
 		if (judgeQuestionInfo != null) {
 			questionInfo = judgeQuestionInfo.split(",");
 			questionType = "judgeQuestion";
-			addQuestionToData(questionType, questionInfo);
+			addQuestionToData(studentId, testPaper, questionType, questionInfo);
 		}
 		
 		String fillBlanksQuestionInfo = testPaper.getFillBlanksQuestionInfo();
 		if (fillBlanksQuestionInfo != null) {
-			System.out.println("33333");
 			questionInfo = fillBlanksQuestionInfo.split(",");
 			questionType = "fillBlanksQuestion";
-			addQuestionToData(questionType, questionInfo);
+			addQuestionToData(studentId, testPaper, questionType, questionInfo);
 		}
-		return questionCount;
 		
 	}
 	
-	private void addQuestionToData(String questionType, String[] questionInfo) {
+	private void addQuestionToData(String studentId, TestPaper testPaper, String questionType, String[] questionInfo) {
 		for (int i = 0; i < questionInfo.length; i++) {
 			// 获取到试题信息的一组数据(章节号，难易程度，试题数量)
 			int sectionId = Integer.parseInt(questionInfo[i].split("==")[0]); // 章节号
@@ -105,21 +102,29 @@ public class TestPaperServiceImpl implements TestPaperServiceI {
 					if ("choiceQuestion".equals(questionType)) {
 						choiceQuestionId += (questionId + ",");
 						choiceQuestionCount++;
-//						questionCount++;
 					} else if ("judgeQuestion".equals(questionType)) {
 						judgeQuestionId += (questionId + ",");
 						judgeQuestionCount++;
-//						questionCount++;
 					} else if ("fillBlanksQuestion".equals(questionType)) {
 						fillBlanksQuestionId += (questionId + ",");
 						fillBlanksQuestionCount++;
-//						questionCount++;
 					}
 				}
 			}
 		}
-		// 将临时信息存储
-		TestPaper
+		
+		// 将信息封装为对象
+		questionInformation.setStudentId(studentId);
+		questionInformation.setTestPaperId(testPaper.getId());
+		questionInformation.setCourseId(testPaper.getCourseId());
+		questionInformation.setChoiceQuestionId(choiceQuestionId);
+		questionInformation.setJudgeQuestionId(judgeQuestionId);
+		questionInformation.setFillBlanksQuestionId(fillBlanksQuestionId);
+		
+		// 将信息存入数据库
+		new QuestionInformationDaoImpl
+		
+		
 	}
 
 }
