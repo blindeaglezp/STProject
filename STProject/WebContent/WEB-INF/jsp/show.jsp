@@ -22,7 +22,7 @@
         /* header end */    
         
         /* start city */
-        .city{width:15%;border-right:1px solid red;}
+        .city{width:180px;border-right:1px solid red;float:left;}
         .city ul li{width:80%;margin:0 auto;}
         .city ul li:hover{cursor:pointer;}
         .city ul li button.addCounty{margin-left:20px;border:none;background:#FFF;color:#3A5FCD;}
@@ -32,6 +32,13 @@
         .city ul li .county{display:none;font-size:14px;}
         .city ul li .county li{text-indent:16px;}
         /* city end */
+        
+        /* start proManager */
+        .proManager{width:1019px;float:left;}
+        .proManager .condition .selCity{text-align:center;}
+        .proManager .content table{margin:30px auto 0;text-align:center;border-collapse:collapse;border-style:solid;
+            line-height:25px;}
+        /* proManager end */
         
         /* start addCountyForm */
         #gray{width:100%;height:100%;background:rgba(0,0,0,0.5);position:absolute;top:0px;display:none;}
@@ -74,7 +81,33 @@
             </ul>
         </div>
     	<div class="proManager">
-    	
+    		<div class="condition">
+    			<select class="selCity" onChange="javascript:queryProjectByCityId();">
+    				<option disabled selected>请选择市</option>
+    				<c:forEach items="${citys }" var="city">
+    					<option value="${city.id }">${city.name }</option>
+    				</c:forEach>
+    			</select>
+    		</div>
+    		<div class="content">
+                <table border="1">
+                    <tr>
+                        <th width="30"></th>
+                        <th width="70">市</th>
+                        <th width="70">县</th>
+                        <th width="70">项目号</th>
+                        <th width="100">项目名</th>
+                        <th width="100">项目文号</th>
+                        <th width="100">科目</th>
+                        <th width="70">级别</th>
+                        <th width="70">预期目标</th>
+                        <th width="70">总数</th>
+                        <th width="70">支付数</th>
+                        <th width="70">支付进度</th>
+                        <th width="70">审核状态</th>
+                    </tr>
+                </table>
+            </div>
     	</div>
     </div>
     

@@ -43,6 +43,30 @@ $(".btn_addCounty").click(function() {
 	$("#addCountyForm").hide();
 });
 
+// 根据市id查询项目
+function queryProjectByCityId() {
+	$(".selCity option").each(function() {
+		if (this.selected) {
+			var cityId = $(this).val();
+			var data = {"cityId":cityId};
+			$.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "/STProject/servlet/DoServlet?type=queryProjectByCityId",
+				data : data,
+				success : function(data) {
+					alert(data);
+					$(data).each(function() {
+						$(".content table").append("<tr><td>1</td><td></td><td></td>" +
+                        "<td></td><td></td><td></td><td></td><td></td>" +
+                        "<td></td><td></td><td></td><td></td><td></td></tr>");
+					});
+				}
+			});
+		}
+	});
+}
+
 //点击关闭按钮 关闭功能
 $("a.close").click(function() {
 	$("#gray").hide();

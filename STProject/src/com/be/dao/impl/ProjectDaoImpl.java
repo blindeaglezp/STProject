@@ -22,11 +22,12 @@ public class ProjectDaoImpl extends JdbcUtil implements ProjectDaoI {
 		String sql = "select project.id,project.proid,project.name,project.budtarget,project.paynum,project.total,project.payprogress ,project.examine,city.name,county.name,"
 				+ "subject.name,scale.name,state.name,project.charnum from project,city,county,subject,scale,state where project.cityid=city.id  and project.countyid=county.id "
 				+ "and project.subjectid=subject.id  and project.scaleid=scale.id and project.stateid=state.id and project.cityid=? and project.stateid=?;";
-		Integer[] params = new Integer[] { cityId, 1 };
+		Integer[] params = new Integer[] {cityId, 1};
 		projects = new ArrayList<Project>();
 		rs = getQuery(sql, params);
 		try {
 			while (rs.next()) {
+				System.out.println("******************");
 				projectObj = new Project();
 				projectObj.setId(rs.getInt(1));
 				projectObj.setProId(rs.getString(2));

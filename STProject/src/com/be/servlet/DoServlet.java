@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.be.model.City;
 import com.be.model.County;
+import com.be.model.Project;
 import com.be.service.impl.CityServiceImpl;
 import com.be.service.impl.CountyServiceImpl;
+import com.be.service.impl.ProjectServiceImpl;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -26,6 +28,7 @@ public class DoServlet extends HttpServlet {
 	private Map<Integer, List<County>> cityCountys = null; // 对应市的县信息
 	private JSONObject jsonObj = null; // JSON对象
 	private JSONArray jsonArr = null; // JSON数组
+	private List<Project> projects = null; // 项目集合
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,6 +38,7 @@ public class DoServlet extends HttpServlet {
 		switch (type) {
 		case "toIndex" : toIndex(request, response); break;
 		case "addCounty" : addCounty(request, response); break;
+		case "queryProjectByCityId" : queryProjectByCityId(request, response); break;
 		}
 		
 	}
@@ -84,6 +88,20 @@ public class DoServlet extends HttpServlet {
 			response.getWriter().print(jsonObj);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void queryProjectByCityId(HttpServletRequest request, HttpServletResponse response) {
+		int cityId = Integer.parseInt(request.getParameter("cityId"));
+		System.out.println(cityId);
+		projects = new ProjectServiceImpl().queryProjectByCityId(cityId);
+		if (projects != null && projects.size() > 0) {
+			jsonArr = JSONArray.fromObject(projects);
+			try {
+				response.getWriter().print(jsonArr);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
